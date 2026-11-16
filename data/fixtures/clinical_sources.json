@@ -1,0 +1,264 @@
+{
+  "queries": {
+    "glp1_lean_mass": "(semaglutide OR tirzepatide OR \"GLP-1 receptor agonist\") AND (\"lean mass\" OR \"fat-free mass\" OR \"muscle mass\")",
+    "exercise_protein_glp1": "(\"GLP-1 receptor agonist\" OR semaglutide OR liraglutide) AND (\"resistance training\" OR exercise OR \"protein intake\") AND (muscle OR \"lean mass\")",
+    "bpc157": "\"BPC-157\" OR \"BPC 157\" OR \"body protection compound\""
+  },
+  "sources": [
+    {
+      "id": "pmid-39996356",
+      "lane": "clinical",
+      "title": "Body composition changes during weight reduction with tirzepatide in the SURMOUNT-1 study of adults with obesity or overweight.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39996356/",
+      "speaker": "Look et al. (Diabetes, obesity & metabolism, 2025)",
+      "speaker_credential": "peer-reviewed publication",
+      "platform": "PubMed",
+      "cites_evidence": true,
+      "coi": "unknown",
+      "text": "We assessed changes in body composition following tirzepatide treatment in a substudy of participants with obesity or overweight from the SURMOUNT-1 trial, overall and post hoc in clinically relevant subgroups. Substudy participants (n = 160 of the 2539 in SURMOUNT-1) underwent dual-energy X-ray absorptiometry (DXA) at baseline and Week 72. Body composition parameters were evaluated by analysis of covariance, logistic regression or Fisher's exact test. Post hoc subgroup analyses were conducted by sex (female or male), age (<50, 50 to <65, or ≥65 years) and total body weight reduction tertiles (≤15.3 kg, >15.3 to ≤25.9 kg, or >25.9 kg). The 160 participants (pooled tirzepatide doses n = 124, placebo n = 36) with baseline and end of study DXA data were 73% female and had a mean weight of 102.5 kg and body mass index of 38.0 kg/m2. The change in body weight, fat mass and lean mass from baseline to Week 72 was -21.3%, -33.9% and -10.9% with tirzepatide and -5.3%, -8.2% and -2.6% with placebo, respectively (p < 0.001 for all comparisons). Of the body weight lost, approximately 75% was fat mass and 25% was lean mass for both tirzepatide and placebo. These proportions remained consistent across most subgroup analyses. In participants with obesity or overweight from the SURMOUNT-1 trial, tirzepatide treatment significantly reduced body weight, fat mass and lean mass compared with placebo, while in post hoc analyses, the proportion of body weight lost as fat or lean mass was relatively consistent including in clinically relevant subgroups.",
+      "credential_field": "biomedical research",
+      "publication_types": [
+        "Clinical Trial, Phase III",
+        "Journal Article",
+        "Multicenter Study",
+        "Randomized Controlled Trial"
+      ],
+      "synthetic": false
+    },
+    {
+      "id": "pmid-41068996",
+      "lane": "clinical",
+      "title": "Impact of Semaglutide on fat mass, lean mass and muscle function in patients with obesity: The SEMALEAN study.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41068996/",
+      "speaker": "Alissou et al. (Diabetes, obesity & metabolism, 2026)",
+      "speaker_credential": "peer-reviewed publication",
+      "platform": "PubMed",
+      "cites_evidence": true,
+      "coi": "unknown",
+      "text": "Semaglutide, a GLP-1 receptor agonist, has shown efficacy in promoting weight loss. However, limited data exist on its impact on lean mass, muscle function, and metabolic adaptations. The SEMALEAN study aims to evaluate these parameters in patients with obesity treated with Semaglutide (2.4 mg). This prospective study enrolled 115 patients with obesity between February 2022 and November 2024. Body weight, body composition (measured by DXA), muscle function (handgrip strength), and resting energy expenditure (REE) were assessed at baseline (M0), 7 months (M7), and 12 months (M12). Subgroup analyses examined the impact of sex, type 2 diabetes, previous GLP-1 use, and history of bariatric surgery. A total of 106 patients (68.9% female; mean BMI 46.3 kg/m2) completed the study. Weight loss was significant, with mean reductions of 10% at M7 and 13% at M12; 59% of patients achieved ≥10% weight loss. Total fat mass decreased by 14% at M7 and 18% at M12, while lean mass initially declined (-3 kg at M7) but stabilised thereafter. Handgrip strength improved significantly (+4.5 kg at M12), and the prevalence of sarcopenic obesity decreased from 49% at baseline to 33% at M12. REE normalised to lean mass increased significantly from M7 to M12. Subgroup analyses revealed greater weight and fat mass loss in women, while patients with type 2 diabetes or prior GLP-1 analogue use showed attenuated responses. Patients with a history of bariatric surgery exhibited the most pronounced reductions in body composition parameters. The SEMALEAN study highlights the significant impact of Semaglutide 2.4 mg on weight loss, fat mass reduction, and muscle function improvement, with preserved lean mass and metabolic efficiency. These findings underscore the importance of a comprehensive approach to obesity management, addressing not only weight loss but also functional and metabolic adaptation.",
+      "credential_field": "biomedical research",
+      "publication_types": [
+        "Journal Article"
+      ],
+      "synthetic": false
+    },
+    {
+      "id": "pmid-38937282",
+      "lane": "clinical",
+      "title": "Changes in lean body mass with glucagon-like peptide-1-based therapies and mitigation strategies.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38937282/",
+      "speaker": "Neeland et al. (Diabetes, obesity & metabolism, 2024)",
+      "speaker_credential": "peer-reviewed publication",
+      "platform": "PubMed",
+      "cites_evidence": true,
+      "coi": "unknown",
+      "text": "Weight loss induced by glucagon-like peptide-1 receptor agonists (GLP-1RAs) and dual glucagon-like peptide-1 receptor (GLP-1R)/glucose-dependent insulinotropic polypeptide receptor agonists is coming closer to the magnitudes achieved with surgery. However, with greater weight loss there is concern about potential side effects on muscle quantity (mass), health and function. There is heterogeneity in the reported effects of GLP-1-based therapies on lean mass changes in clinical trials: in some studies, reductions in lean mass range between 40% and 60% as a proportion of total weight lost, while other studies show lean mass reductions of approximately 15% or less of total weight lost. There are several potential reasons underlying this heterogeneity, including population, drug-specific/molecular, and comorbidity effects. Furthermore, changes in lean mass may not always reflect changes in muscle mass as the former measure includes not only muscle but also organs, bone, fluids, and water in fat tissue. Based on contemporary evidence with the addition of magnetic resonance imaging-based studies, skeletal muscle changes with GLP-1RA treatments appear to be adaptive: reductions in muscle volume seem to be commensurate with what is expected given ageing, disease status, and weight loss achieved, and the improvement in insulin sensitivity and muscle fat infiltration likely contributes to an adaptive process with improved muscle quality, lowering the probability for loss in strength and function. Nevertheless, factors such as older age and severity of disease may influence the selection of appropriate candidates for these therapies due to risk of sarcopenia. To further improve muscle health during weight loss, several pharmacological treatments to maintain or improve muscle mass designed in combination with GLP-1-based therapies are under development. Future research on GLP-1-based and other therapies designed for weight loss should focus on more accurate and meaningful assessments of muscle mass, composition, as well as function, mobility or strength, to better define their impact on muscle health for the substantial number of patients who will likely be taking these medications well into the future.",
+      "credential_field": "biomedical research",
+      "publication_types": [
+        "Journal Article",
+        "Review"
+      ],
+      "synthetic": false
+    },
+    {
+      "id": "pmid-40281304",
+      "lane": "clinical",
+      "title": "GLP-1-based therapies for diabetes, obesity and beyond.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40281304/",
+      "speaker": "Drucker (Nature reviews. Drug discovery, 2025)",
+      "speaker_credential": "peer-reviewed publication",
+      "platform": "PubMed",
+      "cites_evidence": true,
+      "coi": "unknown",
+      "text": "Glucagon-like peptide 1 (GLP-1)-based therapies, such as semaglutide and tirzepatide, represent highly effective treatment options for people with type 2 diabetes and obesity, enabling effective control of glucose and weight loss, while reducing cardiovascular and renal morbidity and mortality. The success of these medicines has spurred development of next-generation GLP-1-based drugs, promising greater weight loss, improved tolerability and additional options for the route and frequency of dosing. This Review profiles established and emerging GLP-1-based medicines, discussing optimization of pharmacokinetics and tolerability, engagement of new therapeutically useful pathways and safety aspects. Structurally unique GLP-1-based medicines that achieve substantially greater and rapid weight loss may impact musculoskeletal health, providing a rationale for therapeutics that more selectively target adipose tissue loss while preserving muscle mass and strength. Ongoing clinical trials in peripheral vascular disease, neuropsychiatric and substance use disorders, metabolic liver disease, arthritis, hypertension and neurodegenerative disorders may broaden indications for GLP-1-based therapeutics.",
+      "credential_field": "biomedical research",
+      "publication_types": [
+        "Journal Article",
+        "Review"
+      ],
+      "synthetic": false
+    },
+    {
+      "id": "pmid-38218536",
+      "lane": "clinical",
+      "title": "Antibody blockade of activin type II receptors preserves skeletal muscle mass and enhances fat loss during GLP-1 receptor agonism.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38218536/",
+      "speaker": "Nunn et al. (Molecular metabolism, 2024)",
+      "speaker_credential": "peer-reviewed publication",
+      "platform": "PubMed",
+      "cites_evidence": true,
+      "coi": "unknown",
+      "text": "Glucagon-like peptide 1 (GLP-1) receptor agonists reduce food intake, producing remarkable weight loss in overweight and obese individuals. While much of this weight loss is fat mass, there is also a loss of lean mass, similar to other approaches that induce calorie deficit. Targeting signaling pathways that regulate skeletal muscle hypertrophy is a promising avenue to preserve lean mass and modulate body composition. Myostatin and Activin A are TGFβ-like ligands that signal via the activin type II receptors (ActRII) to antagonize muscle growth. Pre-clinical and clinical studies demonstrate that ActRII blockade induces skeletal muscle hypertrophy and reduces fat mass. In this manuscript, we test the hypothesis that combined ActRII blockade and GLP-1 receptor agonism will preserve muscle mass, leading to improvements in skeletomuscular and metabolic function and enhanced fat loss. In this study, we explore the therapeutic potential of bimagrumab, a monoclonal antibody against ActRII, to modify body composition alone and during weight loss induced by GLP-1 receptor agonist semaglutide in diet-induced obese mice. Mechanistically, we define the specific role of the anabolic kinase Akt in mediating the hypertrophic muscle effects of ActRII inhibition in vivo. Treatment of obese mice with bimagrumab induced a ∼10 % increase in lean mass while simultaneously decreasing fat mass. Daily treatment of obese mice with semaglutide potently decreased body weight; this included a significant decrease in both muscle and fat mass. Combination treatment with bimagrumab and semaglutide led to superior fat mass loss while simultaneously preserving lean mass despite reduced food intake. Treatment with both drugs was associated with improved metabolic outcomes, and increased lean mass was associated with improved exercise performance. Deletion of both Akt isoforms in skeletal muscle modestly reduced, but did not prevent, muscle hypertrophy driven by ActRII inhibition. Collectively, these data demonstrate that blockade of ActRII signaling improves body composition and metabolic parameters during calorie deficit driven by GLP-1 receptor agonism and demonstrate the existence of Akt-independent pathways supporting muscle hypertrophy in the absence of ActRII signaling.",
+      "credential_field": "biomedical research",
+      "publication_types": [
+        "Journal Article",
+        "Research Support, N.I.H., Extramural"
+      ],
+      "synthetic": false
+    },
+    {
+      "id": "pmid-41877354",
+      "lane": "clinical",
+      "title": "Lean Mass Changes With Incretin Therapy Versus Lifestyle Intervention: A Systematic Review and Meta-Analysis of Randomised Controlled Trials.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41877354/",
+      "speaker": "Eisa et al. (Diabetes, obesity & metabolism, 2026)",
+      "speaker_credential": "peer-reviewed publication",
+      "platform": "PubMed",
+      "cites_evidence": true,
+      "coi": "unknown",
+      "text": "To compare lean mass changes between incretin-based therapies (GLP-1 receptor agonists and dual GLP-1/GIP agonists) and intensive lifestyle interventions in adults with overweight or obesity, and to determine whether the proportion of total weight lost as lean mass differs between these treatment modalities. PubMed, Embase, Cochrane CENTRAL, and Web of Science were searched from inception through 20 January 2026. Randomised controlled trials of semaglutide, tirzepatide, liraglutide or lifestyle interventions reporting body composition outcomes measured by dual-energy X-ray absorptiometry or magnetic resonance imaging were included. The co-primary outcomes were the absolute change in lean mass (kg) and the proportion of total weight loss attributable to lean mass. Data were pooled using random-effects models. Risk of bias was assessed using Cochrane RoB 2, and certainty of evidence was evaluated using GRADE. Twenty randomised controlled trials (RCTs) comprising 15 782 participants met inclusion criteria. Lean mass constituted 25%-39% of total weight lost with incretin agonists: semaglutide (35.2% [95% CI: 31.5-38.9]), tirzepatide (25.4% [22.8-28.0]) and liraglutide (26.8% [23.1-30.5]). Lifestyle interventions showed comparable proportional lean mass loss (26.2% [24.1-28.3]; p = 0.42 for comparison), while lifestyle plus resistance training demonstrated the most favourable profile (17.5% [14.2-20.8]). Heterogeneity was moderate (I2 = 68%). No publication bias was detected (Egger's test p = 0.23). Lean mass loss during significant weight reduction is substantial, and the proportion of weight lost as lean mass is broadly comparable between incretin-based pharmacotherapy and lifestyle interventions. Muscle mass can be significantly preserved by integrating resistance training, adequate protein intake, and body composition monitoring into weight-loss treatment programs.",
+      "credential_field": "biomedical research",
+      "publication_types": [
+        "Systematic Review",
+        "Journal Article",
+        "Meta-Analysis",
+        "Comparative Study"
+      ],
+      "synthetic": false
+    },
+    {
+      "id": "pmid-40914550",
+      "lane": "clinical",
+      "title": "Osteoarthritis year in review 2025: Epidemiology and therapy.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40914550/",
+      "speaker": "Dell'Isola et al. (Osteoarthritis and cartilage, 2025)",
+      "speaker_credential": "peer-reviewed publication",
+      "platform": "PubMed",
+      "cites_evidence": true,
+      "coi": "unknown",
+      "text": "To summarise key epidemiological and therapeutic research on osteoarthritis (OA) published between April 2024 and March 2025. A narrative review was conducted using the MEDLINE database, focusing on English-language studies involving human participants published between April 1, 2024 and March 31, 2025. Eligible studies included observational longitudinal studies, systematic reviews, meta-analyses, and phase II-IV randomised controlled trials (RCTs) examining OA treatment and epidemiology. A total of 1920 studies were screened by 3 authors, resulting in 133 studies considered for potential inclusion. Ultimately, 41 studies were selected. Inclusion was based on perceived importance and relevance to identifying risk factors or advancing OA treatment. The global burden of OA continues to rise, with a notable increase in early-onset OA, driven in part by obesity and joint injuries. Epidemiologically, body composition-characterised by high fat mass and low lean mass-emerged as a critical factor influencing OA severity and physical function. Furthermore, the presence of other chronic conditions significantly impacts OA progression and outcomes, and influences management choice, increasing the risk of patients receiving low-value care. Therapeutic interventions for OA, including intra-articular injections (e.g., corticosteroids, hyaluronic acid, stem cells) and pharmacological therapies (e.g., metformin, methotrexate), continue to show limited efficacy. Semaglutide, which targets obesity, demonstrated substantial weight and pain reductions in individuals with knee OA and obesity, suggesting a potential disease-modifying effect through weight loss. The past year's research highlights the complexity of OA and the limited effectiveness of current interventions. While therapies targeting obesity hold promise, further research is needed to confirm their role in disease modification. Personalised treatment approaches that integrate metabolic, biomechanical, and psychosocial factors may be crucial for advancing OA care management.",
+      "credential_field": "biomedical research",
+      "publication_types": [
+        "Journal Article",
+        "Review"
+      ],
+      "synthetic": false
+    },
+    {
+      "id": "pmid-38687506",
+      "lane": "clinical",
+      "title": "Incretin-Based Weight Loss Pharmacotherapy: Can Resistance Exercise Optimize Changes in Body Composition?",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38687506/",
+      "speaker": "Locatelli et al. (Diabetes care, 2024)",
+      "speaker_credential": "peer-reviewed publication",
+      "platform": "PubMed",
+      "cites_evidence": true,
+      "coi": "unknown",
+      "text": "This narrative review highlights the degree to which new antiobesity medications based on gut-derived nutrient-stimulated hormones (incretins) cause loss of lean mass, and the importance of resistance exercise to preserve muscle. Glucagon-like peptide 1 receptor agonists (GLP-1RA) induce substantial weight loss in randomized trials, effects that may be enhanced in combination with glucose-dependent insulinotropic polypeptide (GIP) receptor agonists. Liraglutide and semaglutide (GLP-1RA), tirzepatide (GLP-1 and GIP receptor dual agonist), and retatrutide (GLP-1, GIP, and glucagon receptor triple agonist) are peptides with incretin agonist activity that induce ∼15-24% weight loss in adults with overweight and obesity, alongside beneficial impacts on blood pressure, cholesterol, blood glucose, and insulin. However, these agents also cause rapid and significant loss of lean mass (∼10% or ∼6 kg), comparable to a decade or more of aging. Maintaining muscle mass and function as humans age is crucial to avoiding sarcopenia and frailty, which are strongly linked to morbidity and mortality. Studies indicate that supervised resistance exercise training interventions with a duration >10 weeks can elicit large increases in lean mass (∼3 kg) and strength (∼25%) in men and women. After a low-calorie diet, combining aerobic exercise with liraglutide improved weight loss maintenance compared with either alone. Retaining lean mass during incretin therapy could blunt body weight (and fat) regain on cessation of weight loss pharmacotherapy. We propose that tailored resistance exercise training be recommended as an adjunct to incretin therapy to optimize changes in body composition by preserving lean mass while achieving fat loss.",
+      "credential_field": "biomedical research",
+      "publication_types": [
+        "Journal Article",
+        "Review",
+        "Research Support, Non-U.S. Gov't"
+      ],
+      "synthetic": false
+    },
+    {
+      "id": "pmid-39295512",
+      "lane": "clinical",
+      "title": "Strategies for minimizing muscle loss during use of incretin-mimetic drugs for treatment of obesity.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39295512/",
+      "speaker": "Mechanick et al. (Obesity reviews : an official journal of the International Association for the Study of Obesity, 2025)",
+      "speaker_credential": "peer-reviewed publication",
+      "platform": "PubMed",
+      "cites_evidence": true,
+      "coi": "unknown",
+      "text": "The rapid and widespread clinical adoption of highly effective incretin-mimetic drugs (IMDs), particularly semaglutide and tirzepatide, for the treatment of obesity has outpaced the updating of clinical practice guidelines. Consequently, many patients may be at risk for adverse effects and uncertain long-term outcomes related to the use of these drugs. Of emerging concern is the loss of skeletal muscle mass and function that can accompany rapid substantial weight reduction; such losses can lead to reduced functional and metabolic health, weight cycling, compromised quality of life, and other adverse outcomes. Available evidence suggests that clinical trial participants receiving IMDs for the treatment of obesity lost 10% or more of their muscle mass during the 68- to 72-week interventions, approximately equivalent to 20 years of age-related muscle loss. The ability to maintain muscle mass during caloric restriction-induced weight reduction is influenced by two key factors: nutrition and physical exercise. Nutrition therapy should ensure adequate intake and absorption of high-quality protein and micronutrients, which may require the use of oral nutritional supplements. Additionally, concurrent physical activity, especially resistance training, has been shown to effectively minimize loss of muscle mass and function during weight reduction therapy. All patients receiving IMDs for obesity should participate in comprehensive treatment programs emphasizing adequate protein and micronutrient intakes, as well as resistance training, to preserve muscle mass and function, maximize the benefit of IMD therapy, and minimize potential risks.",
+      "credential_field": "biomedical research",
+      "publication_types": [
+        "Journal Article",
+        "Review"
+      ],
+      "synthetic": false
+    },
+    {
+      "id": "pmid-40005999",
+      "lane": "clinical",
+      "title": "Multifunctionality and Possible Medical Application of the BPC 157 Peptide-Literature and Patent Review.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40005999/",
+      "speaker": "Józwiak et al. (Pharmaceuticals (Basel, Switzerland), 2025)",
+      "speaker_credential": "peer-reviewed publication",
+      "platform": "PubMed",
+      "cites_evidence": true,
+      "coi": "unknown",
+      "text": "BPC 157, known as the \"Body Protection Compound\", is a pentadecapeptide isolated from human gastric juice that demonstrated its pleiotropic beneficial effects in various preclinical models mimicking medical conditions, such as tissue injury, inflammatory bowel disease, or even CNS disorders. Unlike many other drugs, BPC 157 has a desirable safety profile, since only a few side effects have been reported following its administration. Nevertheless, this compound was temporarily banned by the World Anti-Doping Agency (WADA) in 2022 (it is not currently listed as banned by the WADA). However, it has not been approved for use in standard medicine by the FDA and other global regulatory authorities due to the absence of sufficient and comprehensive clinical studies confirming its health benefits in humans. In this review, we summarize information on the biological activities of BPC 157, with particular reference to its mechanism of action and probable toxicity. This generated the attention of experts, as BPC 157 has been offered for sale on many websites. We also present recent interest in BPC 157 as reflected in a number of patent applications and granted patents.",
+      "credential_field": "biomedical research",
+      "publication_types": [
+        "Journal Article",
+        "Review"
+      ],
+      "synthetic": false
+    },
+    {
+      "id": "pmid-34324435",
+      "lane": "clinical",
+      "title": "Intra-Articular Injection of BPC 157 for Multiple Types of Knee Pain.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34324435/",
+      "speaker": "Lee et al. (Alternative therapies in health and medicine, 2021)",
+      "speaker_credential": "peer-reviewed publication",
+      "platform": "PubMed",
+      "cites_evidence": true,
+      "coi": "unknown",
+      "text": "Knee pain, a common complaint in primary care, has many causes, the most common of which is osteoarthritis (OA). Other common causes are meniscus tears, tendinosis, ligament tears or sprains, rheumatoid arthritis, lupus and septic arthritis. Also, referred pain from hip joint pathology like slipped capital femoral epiphysis can result in knee pain.1 The use of peptides BPC157 and thymosin-beta-4 (TB4) has not been studied in the treatment of knee pain. A retrospective study was done at the Institute for Hormonal Balance in Orlando, Florida, USA to see whether intra-articular injection of the peptide BPC 157, alone or combined with TB4, helped relieve knee pain. A 1-year chart review from 2019 to 2020 was performed. Since this was a retrospective study, patient follow-up varied, with most patients having had an injection of peptide into their knee 6 months to 1 year prior to the study. Of the 17 patients in the study, 16 were contacted by phone to follow up on the status of their knee pain. Only 1 patient could not be reached for the survey. Patients were asked to rate their pain prior to injection, the length of time the peptides helped ease the pain and the degree to which the injection helped them. No specific tools were used to measure their improvement in function, quality of life, stiffness or activities of daily living. The survey's main goal was to determine whether BPC157 helped with multiple types of knee pain in a primary care setting. Of the 16 patients, 12 had received only BPC 157 as an intra-articular injection. In this group, 11 of the 12 patients (91.6%) had significant improvement in knee pain, whereas 1 patient (8.3 %) had no improvement. The other 4 patients received a combination of 2 peptide injections of BPC 157 and TB4. Of the patients who received both peptides, 75% showed significant improvement, but 25% had no relief of their knee pain. Overall, 14 of 16 patients (87.5%) had relief of their knee pain when BPC 157 or a combination of BPC 157 and TB4 was used. This small study suggests that intra-articular injection of BPC-157 helps with multiple types of knee pain. BPC157 is a peptide with regenerative properties that can be used to relieve multiple types of knee pain.2,3 Future studies are needed to look at the different causes of knee pain with follow-up magnetic resonance imaging scans (MRIs) to document the peptide's benefits. BPC157 has the potential to repair tears, build cartilage and reduce the number of knee surgeries. Because of its reparative properties, treatment with BPC157 offers advantages over the use of steroids. BPC157 is a peptide with regenerative properties that can be used to relieve multiple types of knee pain.2,3 Future studies are needed to look at the different causes of knee pain with follow-up MRIs to document the peptide's benefits. BPC157 has the potential to repair tears, build cartilage and reduce the number of knee surgeries. Because of its reparative properties, treatment with BPC157 offers advantages over the use of steroids.",
+      "credential_field": "biomedical research",
+      "publication_types": [
+        "Journal Article"
+      ],
+      "synthetic": false
+    },
+    {
+      "id": "pmid-30915550",
+      "lane": "clinical",
+      "title": "Gastric pentadecapeptide body protection compound BPC 157 and its role in accelerating musculoskeletal soft tissue healing.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30915550/",
+      "speaker": "Gwyer et al. (Cell and tissue research, 2019)",
+      "speaker_credential": "peer-reviewed publication",
+      "platform": "PubMed",
+      "cites_evidence": true,
+      "coi": "unknown",
+      "text": "There is a current need for a therapy that can alleviate the social and economic burden that presents itself with debilitating and recurring musculoskeletal soft tissue injuries and disorders. Currently, several therapies are emerging and undergoing trials in animal models; these focus on the manipulation and administration of several growth factors implicated with healing. However, limitations include in vivo instability, reliance on biocompatible and robust carriers and restricted application procedures (local and direct). The aim of this paper is therefore to critically review the current literature surrounding the use of BPC 157, as a feasible therapy for healing and functional restoration of soft tissue damage, with a focus on tendon, ligament and skeletal muscle healing. Currently, all studies investigating BPC 157 have demonstrated consistently positive and prompt healing effects for various injury types, both traumatic and systemic and for a plethora of soft tissues. However, to date, the majority of studies have been performed on small rodent models and the efficacy of BPC 157 is yet to be confirmed in humans. Further, over the past two decades, only a handful of research groups have performed in-depth studies regarding this peptide. Despite this, it is apparent that BPC 157 has huge potential and following further development has promise as a therapy to conservatively treat or aid recovery in hypovascular and hypocellular soft tissues such as tendon and ligaments. Moreover, skeletal muscle injury models have suggested a beneficial effect not only for disturbances that occur as a result of direct trauma but also for systemic insults including hyperkalamia and hypermagnesia. Promisingly, there are few studies reporting any adverse reactions to the administration of BPC 157, although there is still a need to understand the precise healing mechanisms for this therapy to achieve clinical realisation.",
+      "credential_field": "biomedical research",
+      "publication_types": [
+        "Journal Article",
+        "Review"
+      ],
+      "synthetic": false
+    },
+    {
+      "id": "pmid-34267654",
+      "lane": "clinical",
+      "title": "Stable Gastric Pentadecapeptide BPC 157 and Wound Healing.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34267654/",
+      "speaker": "Seiwerth et al. (Frontiers in pharmacology, 2021)",
+      "speaker_credential": "peer-reviewed publication",
+      "platform": "PubMed",
+      "cites_evidence": true,
+      "coi": "unknown",
+      "text": "Significance: The antiulcer peptide, stable gastric pentadecapeptide BPC 157 (previously employed in ulcerative colitis and multiple sclerosis trials, no reported toxicity (LD1 not achieved)), is reviewed, focusing on the particular skin wound therapy, incisional/excisional wound, deep burns, diabetic ulcers, and alkali burns, which may be generalized to the other tissues healing. Recent Advances: BPC 157 has practical applicability (given alone, with the same dose range, and same equipotent routes of application, regardless the injury tested). Critical Issues: By simultaneously curing cutaneous and other tissue wounds (colocutaneous, gastrocutaneous, esophagocutaneous, duodenocutaneous, vesicovaginal, and rectovaginal) in rats, the potency of BPC 157 is evident. Healing of the wounds is accomplished by resolution of vessel constriction, the primary platelet plug, the fibrin mesh which acts to stabilize the platelet plug, and resolution of the clot. Thereby, BPC 157 is effective in wound healing much like it is effective in counteracting bleeding disorders, produced by amputation, and/or anticoagulants application. Likewise, BPC 157 may prevent and/or attenuate or eliminate, thus, counteract both arterial and venous thrombosis. Then, confronted with obstructed vessels, there is circumvention of the occlusion, which may be the particular action of BPC 157 in ischemia/reperfusion. Future Directions: BPC 157 rapidly increases various genes expression in rat excision skin wound. This would define the healing in the other tissues, that is, gastrointestinal tract, tendon, ligament, muscle, bone, nerve, spinal cord, cornea (maintained transparency), and blood vessels, seen with BPC 157 therapy.",
+      "credential_field": "biomedical research",
+      "publication_types": [
+        "Journal Article",
+        "Review"
+      ],
+      "synthetic": false
+    },
+    {
+      "id": "pmid-40756949",
+      "lane": "clinical",
+      "title": "Emerging Use of BPC-157 in Orthopaedic Sports Medicine: A Systematic Review.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40756949/",
+      "speaker": "Vasireddi et al. (HSS journal : the musculoskeletal journal of Hospital for Special Surgery, 2025)",
+      "speaker_credential": "peer-reviewed publication",
+      "platform": "PubMed",
+      "cites_evidence": true,
+      "coi": "unknown",
+      "text": "Background: Body protection compound-157 (BPC-157) is a naturally occurring gastric peptide that promotes mucosal integrity and homeostasis. Preclinical studies show its potential for promoting healing in musculoskeletal injuries such as fractures, tendon ruptures, ligament tears, and muscle injuries. Despite lacking US Food and Drug Administration approval and its use being banned in professional sports, it is increasingly used by clinicians and athletes. Purpose: We sought to (1) provide a comprehensive synthesis of the BPC-157 literature from an orthopedic sports medicine perspective and (2) elucidate the mechanism of action, musculoskeletal effects, metabolism, and safety profile. Methods. We conducted a systematic review of English-language literature, published from database inception to June 3, 2024, from PubMed, Cochrane, and Embase. We searched PROSPERO to identify any current or unpublished reviews. Studies reporting BPC-157's mechanism, musculoskeletal outcomes, metabolism, and safety were included. Articles were screened in 3 phases by 2 reviewers. In cases of a disagreement between the 2 reviewers, blinding was removed, and eligibility was determined by group consensus, with a third author making the final decision. Results. A total of 544 articles from 1993 to 2024 were identified. After duplicates were removed, 36 studies were included (35 preclinical studies, 1 clinical study). The studies suggest that BPC-157 enhances growth hormone receptor expression and several pathways involved in cell growth and angiogenesis, while reducing inflammatory cytokines. In preclinical models, BPC-157 improved functional, structural, and biomechanical outcomes in muscle, tendon, ligament, and bony injuries. In a retrospective study of musculoskeletal pain following intraarticular injection of BPC-157 for unspecified chronic knee pain, 7 of 12 patients reported relief for >6 months. BPC-157 is metabolized in the liver, with a half-life of less than 30 minutes, and is cleared by the kidneys. Preclinical safety studies showed no adverse effects across several organ systems. No clinical safety data were found. Conclusion: This systematic review of level IV and level V studies suggests that BPC-157 shows promise for promoting recovery from musculoskeletal injuries. Adverse effects are possible due to unregulated manufacturing, contamination, or unknown clinical safety. We recommend that clinicians counsel athletes to understand their organizations' rules to remain compliant with medication/supplement safety and testing standards.",
+      "credential_field": "biomedical research",
+      "publication_types": [
+        "Journal Article",
+        "Review"
+      ],
+      "synthetic": false
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+# SYNTHETIC intake transcript. Fictional person; no real health information.
+# persona_id: p-001
+# demo question: How do I avoid losing muscle on semaglutide, and should I add a peptide like BPC-157?
+
+Agent: Thanks for talking with me. To start, what would you most like help with right now?
+User: I started semaglutide about four months ago and I've lost a lot of weight fast, which is great, but I feel weaker at the gym and my face looks kind of hollow. I want to keep losing fat without losing muscle.
+Agent: Got it. Who prescribed the semaglutide, and is it the brand product from a pharmacy?
+User: My primary care doctor prescribed it, and I pick it up at a regular pharmacy. I'm on it for weight and because my A1C was in the prediabetes range.
+Agent: Are you taking any other medications?
+User: Metformin, which I've been on for about two years. Nothing else prescribed.
+Agent: Any supplements, peptides or other products?
+User: A whey protein shake most days and creatine. I also bought BPC-157 from a website a friend recommended. I haven't started it yet. A lot of people on Reddit and some guys on TikTok say it helps with recovery and keeps muscle on while you're on a GLP-1.
+Agent: Thanks for telling me. Any other health conditions I should know about?
+User: Prediabetes, and mild reflux that got a bit worse after starting the semaglutide. Otherwise healthy.
+Agent: How do you usually feel about trying new things for your health? One is very cautious, five is happy to experiment.
+User: Probably a three. I'll try things if there's a decent reason, but I don't want to do anything dumb.
+Agent: And how ready are you to change something this week? One is just exploring, five is ready right now.
+User: Four. I want a plan I can start on Monday.
+Agent: When it comes to health advice, how much do you trust each of these, one to five: your own doctor, doctors who post online, fitness coaches, Reddit, and influencers?
+User: My doctor, three, she's great but I get ten minutes. Doctors online, four, I watch a few. Coaches, four. Reddit, honestly four, people are real about side effects. Influencers, maybe three.
+Agent: What does a good outcome look like in six months?
+User: Down another fifteen pounds, stronger than I am now, and off the reflux if possible.

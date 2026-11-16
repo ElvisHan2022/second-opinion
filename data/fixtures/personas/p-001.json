@@ -1,0 +1,32 @@
+{
+  "user_id": "p-001",
+  "synthetic": true,
+  "demo_question": "How do I avoid losing muscle on semaglutide, and should I add a peptide like BPC-157?",
+  "goals": [
+    "continue fat loss",
+    "preserve or build muscle mass and strength",
+    "reduce reflux symptoms"
+  ],
+  "conditions": [
+    "prediabetes",
+    "gastroesophageal reflux (mild, worsened since starting semaglutide)"
+  ],
+  "medications": [
+    {"name": "semaglutide", "approved": true},
+    {"name": "metformin", "approved": true}
+  ],
+  "supplements_peptides": [
+    {"name": "whey protein", "source": "retail", "fda_approved": false},
+    {"name": "creatine monohydrate", "source": "retail", "fda_approved": false},
+    {"name": "BPC-157", "source": "online vendor, not yet started", "fda_approved": false}
+  ],
+  "risk_tolerance": 3,
+  "readiness_to_act": 4,
+  "source_trust": {
+    "doctor": 3,
+    "physician_creator": 4,
+    "coach": 4,
+    "reddit": 4,
+    "influencer": 3
+  }
+}

@@ -1,0 +1,248 @@
+{
+  "_note": "REAL public posts found by Google search in Chrome on 2026-11-16 (site: filters for reddit.com, tiktok.com, instagram.com, youtube.com, plus blogs). Collected from Google result snippets only; posts were not opened. `text` is our one-line paraphrase of the snippet, never a quote. No usernames for private individuals, no poster health details. Credentials are as self-described in the account name or snippet and are NOT verified. `topic_stances` are the collector's reading of the snippet and must be checked before grading. No dosing for non-approved peptides may appear here.",
+  "demo_question": "How do I avoid losing muscle on semaglutide, and should I add a peptide like BPC-157?",
+  "collected": "2026-11-16",
+  "collected_via": "google_snippet",
+  "posts": [
+    {
+      "id": "real-01", "lane": "public", "synthetic": false, "platform": "Reddit",
+      "url": "https://www.reddit.com/r/Peptides/comments/196idwr/do_you_lose_muscle_mass_on_semaglutide/",
+      "title": "Do you lose muscle mass on semaglutide? (r/Peptides)",
+      "speaker": "Reddit user, r/Peptides", "speaker_credential": null, "credential_field": null,
+      "claim": "Semaglutide itself doesn't target muscle; rapid weight loss does, so prioritise protein and strength training.",
+      "claim_field": "obesity medicine", "cites_evidence": false, "coi": "unknown",
+      "text": "Commenter says any rapid weight loss can cost muscle, and recommends putting protein and strength training first.",
+      "topic_stances": {"t-resistance": "supports", "t-protein": "supports"}
+    },
+    {
+      "id": "real-02", "lane": "public", "synthetic": false, "platform": "Reddit",
+      "url": "https://www.reddit.com/r/Peptides/comments/1ge7nxo/seeking_advice_on_peptides_to_mitigate_muscle/",
+      "title": "Seeking advice on peptides to mitigate muscle loss (r/Peptides)",
+      "speaker": "Reddit user, r/Peptides", "speaker_credential": null, "credential_field": null,
+      "claim": "GLP-1s don't directly cause muscle loss, and peptides such as KPV or BPC-157 can help.",
+      "claim_field": "pharmacology", "cites_evidence": false, "coi": "unknown",
+      "text": "Commenter argues GLP-1s don't directly cause muscle loss and suggests peptides like KPV or BPC-157.",
+      "topic_stances": {"t-bpc-muscle": "supports"}
+    },
+    {
+      "id": "real-03", "lane": "public", "synthetic": false, "platform": "Reddit",
+      "url": "https://www.reddit.com/r/NTNPerformance/comments/1tc5a9d/peptide_stacking_cheat_sheet_what_goes_together/",
+      "title": "Peptide stacking cheat sheet (r/NTNPerformance)",
+      "speaker": "Reddit post in a peptide-performance community", "speaker_credential": null, "credential_field": null,
+      "claim": "Muscle loss is the biggest risk on a GLP-1 cut, and stacking BPC-157 helps address it.",
+      "claim_field": "pharmacology", "cites_evidence": false, "coi": "unknown",
+      "text": "Stacking guide says losing muscle is the biggest risk of a GLP-1 cut and discusses adding BPC-157 to peptide stacks.",
+      "topic_stances": {"t-leanmass": "supports", "t-bpc-muscle": "supports"}
+    },
+    {
+      "id": "real-04", "lane": "public", "synthetic": false, "platform": "Reddit",
+      "url": "https://www.reddit.com/r/Semaglutide/comments/1x89z1i/losing_muscle_is_part_of_the_deal/",
+      "title": "Losing muscle is part of the deal? (r/Semaglutide)",
+      "speaker": "Reddit user, r/Semaglutide", "speaker_credential": null, "credential_field": null,
+      "claim": "How much muscle you lose depends on strength training and protein, and it can be a substantial share of weight lost.",
+      "claim_field": "obesity medicine", "cites_evidence": false, "coi": "unknown",
+      "text": "Commenter says muscle loss depends on strength training and protein intake and can still be a sizeable share of the weight lost.",
+      "topic_stances": {"t-leanmass": "supports", "t-resistance": "supports", "t-protein": "supports"}
+    },
+    {
+      "id": "real-05", "lane": "public", "synthetic": false, "platform": "Reddit",
+      "url": "https://www.reddit.com/r/Semaglutide/comments/1xx73wg/protecting_muscle_while_losing_weight_on/",
+      "title": "Protecting muscle while losing weight on semaglutide (r/Semaglutide)",
+      "speaker": "Reddit user, r/Semaglutide", "speaker_credential": null, "credential_field": null,
+      "claim": "Eat protein first at every meal; eating too little makes muscle loss worse.",
+      "claim_field": "nutrition", "cites_evidence": false, "coi": "unknown",
+      "text": "Post advises protein first at every meal and warns that under-eating worsens muscle loss.",
+      "topic_stances": {"t-protein": "supports"}
+    },
+    {
+      "id": "real-06", "lane": "public", "synthetic": false, "platform": "Reddit",
+      "url": "https://www.reddit.com/r/Semaglutide/comments/1w3ii83/has_anyone_built_meaningful_strengthmuscles_while/",
+      "title": "Has anyone built meaningful strength while on semaglutide? (r/Semaglutide)",
+      "speaker": "Reddit user, r/Semaglutide", "speaker_credential": null, "credential_field": null,
+      "claim": "With very high protein and lifting, body recomposition is possible while losing weight on semaglutide.",
+      "claim_field": "lived experience", "cites_evidence": false, "coi": "unknown",
+      "text": "Commenter describes visible recomposition from high protein intake and lifting while losing weight.",
+      "topic_stances": {"t-resistance": "supports", "t-protein": "supports"}
+    },
+    {
+      "id": "real-07", "lane": "public", "synthetic": false, "platform": "Reddit",
+      "url": "https://www.reddit.com/r/Semaglutide/comments/1sl85pj/up_to_40_of_weight_lost_on_glp1s_can_be_muscle/",
+      "title": "Up to 40% of weight lost on GLP-1s can be muscle (r/Semaglutide)",
+      "speaker": "Reddit user, r/Semaglutide", "speaker_credential": null, "credential_field": null,
+      "claim": "The STEP 1 trial showed meaningful muscle loss on semaglutide over 68 weeks.",
+      "claim_field": "obesity medicine", "cites_evidence": true, "coi": "unknown",
+      "text": "Commenter cites the STEP 1 trial to argue that semaglutide users lose a meaningful amount of muscle.",
+      "topic_stances": {"t-leanmass": "supports"}
+    },
+    {
+      "id": "real-08", "lane": "public", "synthetic": false, "platform": "Reddit",
+      "url": "https://www.reddit.com/r/Semaglutide/comments/16mrdro/building_muscles_on_sema/",
+      "title": "Building muscles on sema (r/Semaglutide)",
+      "speaker": "Reddit user, r/Semaglutide", "speaker_credential": null, "credential_field": null,
+      "claim": "Semaglutide speeds up muscle loss; focused strength training and protein are the best ways to limit it.",
+      "claim_field": "obesity medicine", "cites_evidence": false, "coi": "unknown",
+      "text": "Commenter says semaglutide accelerates muscle loss and that strength training plus protein are the best defence.",
+      "topic_stances": {"t-leanmass": "supports", "t-resistance": "supports", "t-protein": "supports"}
+    },
+    {
+      "id": "real-09", "lane": "public", "synthetic": false, "platform": "Reddit",
+      "url": "https://www.reddit.com/r/GLP1ResearchTalk/comments/1rzqkps/there_is_a_drug_being_tested_alongside/",
+      "title": "There is a drug being tested alongside semaglutide (r/GLP1ResearchTalk)",
+      "speaker": "Reddit user, r/GLP1ResearchTalk", "speaker_credential": null, "credential_field": null,
+      "claim": "An investigational drug combined with semaglutide preserved lean mass better than semaglutide alone.",
+      "claim_field": "obesity medicine", "cites_evidence": true, "coi": "unknown",
+      "text": "Post relays trial results in which a combination therapy kept or increased lean mass compared with semaglutide alone.",
+      "topic_stances": {"t-leanmass": "supports"}
+    },
+    {
+      "id": "real-10", "lane": "public", "synthetic": false, "platform": "TikTok",
+      "url": "https://www.tiktok.com/@magnoliapharmacy/video/7701898489252400397",
+      "title": "BPC-157 enforcement discretion explained (Magnolia Pharmacy)",
+      "speaker": "Magnolia Pharmacy (pharmacy account)", "speaker_credential": "pharmacy (self-described)", "credential_field": "pharmacology",
+      "claim": "Recent federal peptide news is enforcement discretion, not FDA approval; BPC-157 is still not approved.",
+      "claim_field": "pharmacology", "cites_evidence": true, "coi": "unknown",
+      "text": "Pharmacy account explains that recent peptide news is enforcement discretion, not FDA approval of BPC-157.",
+      "topic_stances": {"t-bpc-safety": "supports"}
+    },
+    {
+      "id": "real-11", "lane": "public", "synthetic": false, "platform": "TikTok",
+      "url": "https://www.tiktok.com/@drdennisschimpf/video/7540014000357084446",
+      "title": "BPC-157 for surgery recovery: promising but still unproven",
+      "speaker": "Dennis Schimpf, MD MBA (creator account)", "speaker_credential": "MD (self-described)", "credential_field": "medicine",
+      "claim": "BPC-157 may aid soft-tissue repair but the evidence is still preliminary.",
+      "claim_field": "pharmacology", "cites_evidence": false, "coi": "unknown",
+      "text": "Physician creator describes BPC-157 as promising for tissue repair but not yet proven.",
+      "topic_stances": {"t-bpc-muscle": "cautions"}
+    },
+    {
+      "id": "real-12", "lane": "public", "synthetic": false, "platform": "TikTok",
+      "url": "https://www.tiktok.com/@dr.patrick.denard/video/7651234754360118542",
+      "title": "Thinking about using peptides like BPC-157?",
+      "speaker": "Dr Patrick Denard (creator account)", "speaker_credential": "MD (self-described)", "credential_field": "medicine",
+      "claim": "Peptides including BPC-157 help build strength and prevent muscle wasting.",
+      "claim_field": "pharmacology", "cites_evidence": false, "coi": "unknown",
+      "text": "Creator lists claimed peptide benefits including building strength and preventing muscle wasting.",
+      "topic_stances": {"t-bpc-muscle": "supports"}
+    },
+    {
+      "id": "real-13", "lane": "public", "synthetic": false, "platform": "TikTok",
+      "url": "https://www.tiktok.com/@dubaionetv/video/7704659508588514568",
+      "title": "GLP-1 weight loss risks: how much of the weight is muscle (Dubai One TV)",
+      "speaker": "Dubai One TV (news channel)", "speaker_credential": null, "credential_field": null,
+      "claim": "GLP-1 trials report roughly a quarter of weight lost is skeletal muscle.",
+      "claim_field": "obesity medicine", "cites_evidence": true, "coi": "no",
+      "text": "News segment relays trial data that about a quarter of GLP-1 weight loss is muscle.",
+      "topic_stances": {"t-leanmass": "supports"}
+    },
+    {
+      "id": "real-14", "lane": "public", "synthetic": false, "platform": "TikTok",
+      "url": "https://www.tiktok.com/@dr.stefanosinicropi/video/7478744297882373406",
+      "title": "Exploring lesser-known peptides in medicine",
+      "speaker": "Dr. Sinicropi (creator account)", "speaker_credential": "doctor (self-described)", "credential_field": "medicine",
+      "claim": "BPC-157 shows real promise for tendon healing and faster recovery.",
+      "claim_field": "pharmacology", "cites_evidence": false, "coi": "unknown",
+      "text": "Creator says BPC-157 looks promising for tendon healing and recovery.",
+      "topic_stances": {"t-bpc-muscle": "supports"}
+    },
+    {
+      "id": "real-15", "lane": "public", "synthetic": false, "platform": "Instagram",
+      "url": "https://www.instagram.com/p/DbbtivPnaSp/",
+      "title": "Peptides are everywhere on social media (Dana-Farber Cancer Institute)",
+      "speaker": "Dana-Farber Cancer Institute (hospital account)", "speaker_credential": "academic cancer center", "credential_field": "medicine",
+      "claim": "BPC-157 and other trending peptides are not FDA-approved or proven safe and effective in large controlled trials.",
+      "claim_field": "pharmacology", "cites_evidence": true, "coi": "no",
+      "text": "Hospital account warns that BPC-157 and similar peptides lack FDA approval and large controlled trials.",
+      "topic_stances": {"t-bpc-safety": "supports", "t-bpc-muscle": "opposes"}
+    },
+    {
+      "id": "real-16", "lane": "public", "synthetic": false, "platform": "Instagram",
+      "url": "https://www.instagram.com/p/DfrlO6NDUrW/",
+      "title": "Losing weight and preserving muscle are two very different goals",
+      "speaker": "doctor.stefano.md (creator account)", "speaker_credential": "MD (self-described)", "credential_field": "medicine",
+      "claim": "BPC-157 has been studied mainly in preclinical tissue-repair research, not shown to preserve muscle on GLP-1 treatment.",
+      "claim_field": "pharmacology", "cites_evidence": true, "coi": "unknown",
+      "text": "Physician creator notes BPC-157 evidence is mostly preclinical and doesn't show muscle preservation on a GLP-1.",
+      "topic_stances": {"t-bpc-muscle": "opposes"}
+    },
+    {
+      "id": "real-17", "lane": "public", "synthetic": false, "platform": "Instagram",
+      "url": "https://www.instagram.com/reel/De0xx5li7UC/",
+      "title": "At this point, you must have heard of peptides",
+      "speaker": "dr_rajeev_seth (creator account)", "speaker_credential": "doctor (self-described)", "credential_field": "medicine",
+      "claim": "Protein, lifting and sleep matter more than BPC-157 for keeping muscle while losing weight.",
+      "claim_field": "obesity medicine", "cites_evidence": false, "coi": "unknown",
+      "text": "Creator points to protein, lifting and sleep rather than BPC-157 to avoid muscle loss.",
+      "topic_stances": {"t-resistance": "supports", "t-protein": "supports", "t-bpc-muscle": "opposes"}
+    },
+    {
+      "id": "real-18", "lane": "public", "synthetic": false, "platform": "Instagram",
+      "url": "https://www.instagram.com/reel/Del86bXiIZ7/",
+      "title": "Peptides are insane... are they really though?",
+      "speaker": "thepitsingapore (gym account)", "speaker_credential": null, "credential_field": null,
+      "claim": "BPC-157 is hyped for muscle growth and recovery despite very limited human evidence.",
+      "claim_field": "pharmacology", "cites_evidence": false, "coi": "unknown",
+      "text": "Gym account says BPC-157 is hyped for muscle and recovery despite very limited human evidence.",
+      "topic_stances": {"t-bpc-muscle": "opposes"}
+    },
+    {
+      "id": "real-19", "lane": "public", "synthetic": false, "platform": "Instagram",
+      "url": "https://www.instagram.com/p/Dfdec1VjiCA/",
+      "title": "BPC-157 is the athlete's 'dual' peptide",
+      "speaker": "adviceforwellness (wellness account)", "speaker_credential": null, "credential_field": null,
+      "claim": "BPC-157 supports healing of tendons, ligaments and muscles.",
+      "claim_field": "pharmacology", "cites_evidence": false, "coi": "unknown",
+      "text": "Wellness account promotes BPC-157 for tendon, ligament and muscle healing.",
+      "topic_stances": {"t-bpc-muscle": "supports"}
+    },
+    {
+      "id": "real-20", "lane": "public", "synthetic": false, "platform": "YouTube",
+      "url": "https://www.youtube.com/watch?v=lcriBe8QB1A",
+      "title": "GLP-1 muscle loss (Peptide Expert) - Kim Constable",
+      "speaker": "Kim Constable (wellness creator)", "speaker_credential": null, "credential_field": null,
+      "claim": "A real chunk of weight lost on a GLP-1 can be muscle.",
+      "claim_field": "obesity medicine", "cites_evidence": false, "coi": "unknown",
+      "text": "Creator video says GLP-1 weight loss isn't all fat and a real chunk can be muscle.",
+      "topic_stances": {"t-leanmass": "supports"}
+    },
+    {
+      "id": "real-21", "lane": "public", "synthetic": false, "platform": "Blog",
+      "url": "https://www.noom.com/blog/weight-management/glp-1-muscle-loss-prevention/",
+      "title": "How to prevent muscle loss on GLP-1 medications (Noom blog)",
+      "speaker": "Noom (weight-loss company blog)", "speaker_credential": null, "credential_field": null,
+      "claim": "BPC-157's effect on human muscle mass during weight loss remains largely unstudied.",
+      "claim_field": "pharmacology", "cites_evidence": true, "coi": "yes",
+      "text": "Company blog says BPC-157 is marketed for repair but its effect on human muscle during weight loss is largely unstudied.",
+      "topic_stances": {"t-bpc-muscle": "opposes"}
+    },
+    {
+      "id": "real-22", "lane": "public", "synthetic": false, "platform": "Blog",
+      "url": "https://peptiq.io/blog/peptide-stacking-muscle-preservation-glp1",
+      "title": "Peptide stacking for muscle preservation on GLP-1s (peptiq.io)",
+      "speaker": "peptiq.io (peptide information site)", "speaker_credential": null, "credential_field": null,
+      "claim": "BPC-157 speeds muscle-fiber repair, which makes it useful for preserving muscle on a GLP-1.",
+      "claim_field": "pharmacology", "cites_evidence": false, "coi": "unknown",
+      "text": "Peptide site promotes BPC-157 for muscle-fiber repair as part of a GLP-1 stack.",
+      "topic_stances": {"t-bpc-muscle": "supports"}
+    },
+    {
+      "id": "real-23", "lane": "public", "synthetic": false, "platform": "Blog",
+      "url": "https://defianthealth.io/blog/protect-muscle-on-glp-1/",
+      "title": "How to protect muscle mass on a GLP-1 (Defiant Health)",
+      "speaker": "Defiant Health (clinic blog)", "speaker_credential": null, "credential_field": null,
+      "claim": "BPC-157 may support tendon and joint recovery so people can keep resistance training on a GLP-1.",
+      "claim_field": "pharmacology", "cites_evidence": false, "coi": "yes",
+      "text": "Clinic blog suggests BPC-157 may help joints recover so resistance training can continue.",
+      "topic_stances": {"t-resistance": "supports", "t-bpc-muscle": "supports"}
+    },
+    {
+      "id": "real-24", "lane": "public", "synthetic": false, "platform": "Blog",
+      "url": "https://glp3weightloss.com/blog/bpc-157-tissue-repair-glp1-therapy-clinical-evidence-stack-rationale/",
+      "title": "BPC-157 and tissue repair on GLP-1 therapy (glp3weightloss.com)",
+      "speaker": "glp3weightloss.com (weight-loss clinic blog)", "speaker_credential": null, "credential_field": null,
+      "claim": "Studies show BPC-157 accelerates recovery from muscle injuries.",
+      "claim_field": "pharmacology", "cites_evidence": true, "coi": "yes",
+      "text": "Clinic blog relays animal studies on BPC-157 and muscle injury recovery to support adding it to GLP-1 therapy.",
+      "topic_stances": {"t-bpc-muscle": "supports"}
+    }
+  ]
+}

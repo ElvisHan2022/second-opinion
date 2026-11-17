@@ -5,9 +5,10 @@ import re
 import pytest
 
 from src.intake.persona import FIXTURES, extract_persona, load_persona, load_transcript
-from src.retrieval.clinical import SNAPSHOT, load_snapshot
+from src.retrieval import clinical
+from src.retrieval.clinical import SNAPSHOT, journal_badge, load_snapshot
 from src.retrieval.public import POSTS, load_posts
-from src.schemas import validate_persona
+from src.schemas import Source, validate_persona
 
 NON_APPROVED_PEPTIDES = ["BPC-157", "BPC 157", "TB-500", "ipamorelin", "CJC-1295"]
 DOSE = re.compile(r"\d+(\.\d+)?\s*(mg|mcg|µg|μg|ug|units?|iu)\b", re.I)
@@ -101,6 +102,35 @@ def test_clinical_snapshot_has_cached_pubmed_sources():
 
 def test_clinical_snapshot_covers_bpc157():
     assert any("BPC" in s.title for s in load_snapshot())
+
+
+def test_snapshot_includes_nejm_or_lancet():
+    assert any(journal_badge(s) in {"NEJM", "Lancet"} for s in load_snapshot())
+
+
+def test_clinical_sources_have_journal_fields():
+    for s in load_snapshot():
+        assert s.journal and s.journal_abbrev, s.id
+
+
+@pytest.mark.parametrize("abbrev,badge", [
+    ("N Engl J Med", "NEJM"),
+    ("Lancet Diabetes Endocrinol", "Lancet"),
+    ("Lancet", "Lancet"),
+    ("Obesity (Silver Spring)", "PubMed"),
+    (None, "PubMed"),
+])
+def test_journal_badge(abbrev, badge):
+    src = Source(id="x", lane="clinical", title="t", url=None, speaker="s", speaker_credential=None,
+                 platform="PubMed", cites_evidence=True, coi="unknown", text="t", journal_abbrev=abbrev)
+    assert journal_badge(src) == badge
+
+
+def test_efetch_empty_makes_no_request(monkeypatch):
+    def boom(*a, **k):
+        raise AssertionError("network call")
+    monkeypatch.setattr(clinical, "_get", boom)
+    assert clinical.efetch([]) == []
 
 
 # ------------------------------------------------------------- safety

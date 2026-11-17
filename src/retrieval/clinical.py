@@ -30,6 +30,8 @@ EUTILS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 DEMO_QUERIES = {
     "glp1_lean_mass": '(semaglutide OR tirzepatide OR "GLP-1 receptor agonist") AND ("lean mass" OR "fat-free mass" OR "muscle mass")',
     "exercise_protein_glp1": '("GLP-1 receptor agonist" OR semaglutide OR liraglutide) AND ("resistance training" OR exercise OR "protein intake") AND (muscle OR "lean mass")',
+    "nejm_lancet": '("lean mass" OR "fat-free mass" OR "muscle mass" OR "resistance training" OR exercise) AND '
+                   '("N Engl J Med"[ta] OR "Lancet"[ta] OR "Lancet Diabetes Endocrinol"[ta])',
     "bpc157": '"BPC-157" OR "BPC 157" OR "body protection compound"',
 }
 PER_QUERY = 5
@@ -71,6 +73,7 @@ def efetch(pmids: list[str]) -> list[Source]:
         title = "".join(art.find(".//ArticleTitle").itertext()).strip()
         abstract = " ".join("".join(t.itertext()).strip() for t in art.findall(".//Abstract/AbstractText"))
         journal = art.findtext(".//Journal/Title") or "PubMed"
+        journal_abbrev = art.findtext(".//MedlineJournalInfo/MedlineTA") or art.findtext(".//Journal/ISOAbbreviation")
         year = art.findtext(".//PubDate/Year") or (art.findtext(".//PubDate/MedlineDate") or "")[:4]
         authors = art.findall(".//AuthorList/Author")
         first = authors[0].findtext("LastName") if authors else None
@@ -89,8 +92,20 @@ def efetch(pmids: list[str]) -> list[Source]:
             "coi": "unknown",
             "text": abstract or title,
             "publication_types": ptypes,
+            "journal": journal,
+            "journal_abbrev": journal_abbrev,
         }))
     return out
+
+
+def journal_badge(source: Source) -> str:
+    """UI badge from the MEDLINE journal abbreviation: NEJM, Lancet, else PubMed."""
+    abbrev = source.journal_abbrev or ""
+    if abbrev == "N Engl J Med":
+        return "NEJM"
+    if abbrev.startswith("Lancet"):
+        return "Lancet"
+    return "PubMed"
 
 
 def search(queries: dict[str, str] = DEMO_QUERIES) -> list[Source]:

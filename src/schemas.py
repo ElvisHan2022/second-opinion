@@ -132,6 +132,9 @@ class Source:
     claim_field: str | None = None
     # Clinical lane only: publication types from PubMed (drives tier A/B/C).
     publication_types: list[str] = field(default_factory=list)
+    # Clinical lane only: full journal title and MEDLINE abbreviation (e.g. "N Engl J Med").
+    journal: str | None = None
+    journal_abbrev: str | None = None
     synthetic: bool = False
 
     def to_dict(self) -> dict:
@@ -154,6 +157,7 @@ def validate_source(d: dict) -> Source:
         credential_field=d.get("credential_field"),
         claim=d.get("claim"), claim_field=d.get("claim_field"),
         publication_types=list(d.get("publication_types", [])),
+        journal=d.get("journal"), journal_abbrev=d.get("journal_abbrev"),
         synthetic=bool(d.get("synthetic", False)),
     )
 

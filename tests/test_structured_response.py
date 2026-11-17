@@ -54,6 +54,31 @@ def test_extract_study_size():
     assert extract_study_size("in 3 patients") is None
 
 
+def test_extract_study_size_prefers_randomised_count():
+    assert extract_study_size("Of 1,514 participants screened, 938 were randomly assigned.") == 938
+    assert extract_study_size("1595 patients were screened, of whom 1210 were randomly assigned to "
+                              "semaglutide (n=404) or placebo (n=403).") == 1210
+    assert extract_study_size("of 1514 adults assessed for eligibility, 938 (mean age 54 years "
+                              "[SD 10], 476 [51%] were female) were randomly assigned") == 938
+    assert extract_study_size("We randomly assigned 304 adults (1:1) to drug or placebo; "
+                              "2,000 people were contacted.") == 304
+    assert extract_study_size("1,407 participants were randomised to the trial.") == 1407
+    assert extract_study_size("A total of 751 participants underwent randomization.") == 751
+    # Ratios after "randomly assigned" are not counts.
+    assert extract_study_size("were randomly assigned 2:1 to drug; 120 adults enrolled") == 120
+
+
+def test_extract_study_size_ignores_screened_numbers():
+    assert extract_study_size("We screened 2,000 patients and enrolled 160 patients.") == 160
+
+
+def test_real_trial_sizes_are_randomised_counts():
+    by_id = {s.id: s for s in load_snapshot()}
+    assert extract_study_size(by_id["pmid-37385275"].text) == 938   # SURMOUNT-2
+    assert extract_study_size(by_id["pmid-33667417"].text) == 1210  # STEP 2
+    assert extract_study_size(by_id["pmid-37385278"].text) == 667   # OASIS 1
+
+
 def test_extract_study_size_thin_space_thousands():
     # PubMed abstracts sometimes use a thin space as the thousands separator.
     assert extract_study_size("Twenty RCTs comprising 15\u2009782 participants") == 15782
@@ -96,6 +121,23 @@ def test_clinical_journal_names_distinct_capped_and_ordered():
     # Lancet family collapses to one "Lancet"; tier-A/B journal before reviews; at most 3 names.
     assert res["text"].startswith("From Lancet, Diabetes Obes Metab and Diabetes Care sources")
     assert res["n_studies"] == 5
+
+
+def test_long_size_lists_are_compacted():
+    texts = ["We randomized 1,961 adults.", "We enrolled 160 patients.", "x", "We enrolled 12,000 adults.",
+             "We enrolled 300 adults.", "x"]
+    srcs = [_clinical(f"s{i}", "Obesity", t, ["Randomized Controlled Trial"]) for i, t in enumerate(texts)]
+    res = clinical_response(_topic({s.id: "supports" for s in srcs}), srcs)
+    assert ("with study sizes of 4 reported sizes from 160 to 12,000 and 2 not reported, "
+            "with the main finding") in res["text"]
+    assert res["study_sizes"] == [1961, 160, None, 12000, 300, None]
+    # Four or fewer keep the list.
+    res4 = clinical_response(_topic({s.id: "supports" for s in srcs[:4]}), srcs[:4])
+    assert "study sizes of 1,961, 160, size not reported and 12,000," in res4["text"]
+    # More than four, all reported: no "not reported" suffix.
+    full = [s for s in srcs if s.text != "x"] + [_clinical("s9", "Obesity", "We enrolled 50 adults.", [])]
+    res5 = clinical_response(_topic({s.id: "supports" for s in full}), full)
+    assert "study sizes of 5 reported sizes from 50 to 12,000, with" in res5["text"]
 
 
 def test_public_template_exact():

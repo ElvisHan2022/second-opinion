@@ -38,12 +38,25 @@ POOLED_REVIEW_TYPES = {"Systematic Review", "Meta-Analysis"}
 BADGE_RANK = {"NEJM": 0, "Lancet": 1}
 
 _NUM = r"\d{1,3}(?:[,\u2009\u202f]\d{3})+|\d+"  # 1,961 / 15<thin space>782 / 160
+_PEOPLE = r"(?:participants|patients|adults|subjects|individuals|people|women|men|volunteers)"
 _SIZE_PATTERNS = [
     re.compile(rf"\bn\s*=\s*({_NUM})", re.IGNORECASE),
-    re.compile(rf"\b({_NUM})\s+(?:participants|patients|adults|subjects|individuals|people|"
-               rf"women|men|volunteers)\b", re.IGNORECASE),
+    re.compile(rf"\b({_NUM})\s+{_PEOPLE}\b", re.IGNORECASE),
 ]
+# Randomisation counts win over the largest-number rule, so a trial shows the number
+# randomised rather than the number screened. "(?![:\d])" skips ratios such as "2:1".
+_RANDOMISED_PATTERNS = [
+    re.compile(rf"\brandomly\s+assigned\s+({_NUM})(?![:\d])", re.IGNORECASE),
+    re.compile(rf"\brandomi[sz]ed\s+({_NUM})(?![:\d])", re.IGNORECASE),
+    # "1210 were randomly assigned", "938 (mean age ...) were randomly assigned",
+    # "1,407 participants were randomised"
+    re.compile(rf"\b({_NUM})\s+(?:{_PEOPLE}\s+)?(?:\([^()]*\)\s*)?(?:were|was)\s+"
+               rf"(?:randomly\s+assigned|randomi[sz]ed)", re.IGNORECASE),
+    re.compile(rf"\b({_NUM})\s+(?:{_PEOPLE}\s+)?underwent\s+randomi[sz]ation", re.IGNORECASE),
+]
+_SCREENED_BEFORE = re.compile(r"screened\s*$", re.IGNORECASE)
 MIN_SIZE = 5
+MAX_LISTED_SIZES = 4
 
 
 # ------------------------------------------------------------------ helpers
@@ -109,11 +122,39 @@ def load_topics(path: Path = TOPICS) -> list[dict]:
     return topics
 
 
+def _numbers(patterns: list[re.Pattern], text: str, skip_screened: bool = False) -> list[int]:
+    out = []
+    for p in patterns:
+        for m in p.finditer(text):
+            if skip_screened and _SCREENED_BEFORE.search(text, 0, m.start(1)):
+                continue
+            n = int(re.sub(r"\D", "", m.group(1)))
+            if n >= MIN_SIZE:
+                out.append(n)
+    return out
+
+
 def extract_study_size(text: str) -> int | None:
-    """Largest sample size found ("n = 1,234", "N=123", "1,961 adults" ...); numbers < 5 ignored."""
-    sizes = [int(re.sub(r"\D", "", m.group(1))) for p in _SIZE_PATTERNS for m in p.finditer(text)]
-    sizes = [n for n in sizes if n >= MIN_SIZE]
+    """Sample size: the randomised count if stated, else the largest of "n = 1,234",
+    "N=123", "1,961 adults" ... Numbers < 5 and numbers right after "screened" are ignored.
+    """
+    sizes = _numbers(_RANDOMISED_PATTERNS, text) or _numbers(_SIZE_PATTERNS, text, skip_screened=True)
     return max(sizes) if sizes else None
+
+
+def _sizes_text(sizes: list[int | None]) -> str:
+    """Up to 4 sizes as a list; more as "{n} reported sizes from {min} to {max} and {k} not reported"."""
+    if len(sizes) <= MAX_LISTED_SIZES:
+        return _join([_size_text(x) for x in sizes])
+    reported = [x for x in sizes if x is not None]
+    missing = len(sizes) - len(reported)
+    if not reported:
+        return f"size not reported for all {len(sizes)} studies"
+    if len(reported) == 1:
+        text = f"1 reported size of {reported[0]:,}"
+    else:
+        text = f"{len(reported)} reported sizes from {min(reported):,} to {max(reported):,}"
+    return text + (f" and {missing} not reported" if missing else "")
 
 
 def clinical_response(topic: dict, sources: list[Source]) -> dict:
@@ -127,7 +168,7 @@ def clinical_response(topic: dict, sources: list[Source]) -> dict:
     if n:
         text = CLINICAL_TEMPLATE.format(
             sources=_join(names), n_studies=n, studies_word=_plural(n, "study", "studies"),
-            sizes=_join([_size_text(x) for x in sizes]),
+            sizes=_sizes_text(sizes),
             finding=topic["finding"], recommendation=topic["recommendation"])
     else:
         text = CLINICAL_NONE

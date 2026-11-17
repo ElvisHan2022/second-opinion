@@ -10,8 +10,7 @@ from src.retrieval.clinical import SNAPSHOT, journal_badge, load_snapshot
 from src.retrieval.public import POSTS, load_posts
 from src.schemas import Source, validate_persona
 
-NON_APPROVED_PEPTIDES = ["BPC-157", "BPC 157", "TB-500", "ipamorelin", "CJC-1295"]
-DOSE = re.compile(r"\d+(\.\d+)?\s*(mg|mcg|µg|μg|ug|units?|iu)\b", re.I)
+from src.safety import DOSE_PATTERN as DOSE, PEPTIDE_PATTERN
 
 
 # ------------------------------------------------------------- persona
@@ -141,7 +140,7 @@ def test_efetch_empty_makes_no_request(monkeypatch):
 ], ids=lambda p: p.name)
 def test_no_dosing_near_non_approved_peptides_in_fixtures(path):
     text = path.read_text(encoding="utf-8")
-    for name in NON_APPROVED_PEPTIDES:
-        for m in re.finditer(re.escape(name), text, re.I):
-            window = text[max(0, m.start() - 120): m.end() + 120]
-            assert not DOSE.search(window), f"dosing pattern near {name} in {path.name}: {window!r}"
+    # Same peptide names and dose units as the runtime filter (src/safety.py).
+    for m in PEPTIDE_PATTERN.finditer(text):
+        window = text[max(0, m.start() - 120): m.end() + 120]
+        assert not DOSE.search(window), f"dosing pattern near {m.group()} in {path.name}: {window!r}"

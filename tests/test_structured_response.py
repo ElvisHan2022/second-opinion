@@ -44,6 +44,11 @@ def _dosing_near_peptide(text):
     return False
 
 
+def test_weightloss_topic_tags_only_sources_on_glp1_efficacy():
+    stances = {t["id"]: t for t in load_topics()}["t-glp1-weightloss"]["stances"]
+    assert "pub-06" not in stances and "pmid-40914550" not in stances
+
+
 # ------------------------------------------------------------- study size
 
 def test_extract_study_size():
@@ -256,12 +261,48 @@ def test_redact_dosing_peptide_spelling_variants():
     assert flag is True and out.endswith("Rest days matter.")
 
 
+@pytest.mark.parametrize("dose", ["250 milligrams", "5 micrograms", "1 microgram", "0.5 mL", "2 cc",
+                                  "10 milligram"])
+def test_redact_dosing_spelled_out_and_volume_units(dose):
+    out, flag = redact_dosing(f"Inject BPC-157 at {dose} twice a day. Lift weights.")
+    assert flag is True, dose
+    assert dose not in out and out.endswith("Lift weights.")
+
+
+def test_redact_dosing_body_protection_compound():
+    out, flag = redact_dosing("Body Protection Compound is taken at 300 mcg. Sleep well.")
+    assert flag is True and out.endswith("Sleep well.")
+    out, flag = redact_dosing("the body protection compound, 2 mL per day.")
+    assert flag is True
+
+
+def test_redact_dosing_leaves_approved_drug_doses():
+    for text in ("Semaglutide 2.4 mg weekly.", "Semaglutide 2.4 milligrams weekly in 0.75 mL.",
+                 "Inject 1 mL of tirzepatide."):
+        assert redact_dosing(text) == (text, False)
+
+
 def test_composer_redacts_and_flags():
     topic = _topic({"s1": "supports"})
     topic["finding"] = "people take BPC-157 at 250 mcg"
+    topic["recommendation"] = "BPC-157 at 2 milligrams daily"
     res = clinical_response(topic, [_clinical("s1", "Obesity", "x", ["Review"])])
     assert res["redacted"] is True
-    assert "250 mcg" not in res["text"]
+    for field in ("text", "finding", "recommendation"):
+        assert "250 mcg" not in res[field] and "2 milligrams" not in res[field], field
+    assert res["finding"] == res["recommendation"] == "[removed: dosing for a non-approved peptide]"
+
+    pub_topic = _topic({"p1": "supports"})
+    pub_topic["public_conclusion"] = "BPC-157 at 500 mcg protects muscle"
+    pub = public_response(pub_topic, [_post("p1", "Reddit")])
+    assert pub["redacted"] is True
+    assert "500 mcg" not in pub["public_conclusion"] and "500 mcg" not in pub["text"]
+
+
+def test_composer_not_flagged_without_dosing():
+    res = clinical_response(_topic({"s1": "supports"}), [_clinical("s1", "Obesity", "x", ["Review"])])
+    pub = public_response(_topic({"p1": "supports"}), [_post("p1", "Reddit")])
+    assert res["redacted"] is False and pub["redacted"] is False
 
 
 def test_compose_all_shape():

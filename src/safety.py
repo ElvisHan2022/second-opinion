@@ -8,11 +8,16 @@ from __future__ import annotations
 
 import re
 
-NON_APPROVED_PEPTIDES: list[str] = ["BPC-157", "BPC 157", "TB-500", "ipamorelin", "CJC-1295"]
+# Matched case-insensitively. "Body Protection Compound" is BPC-157's long name
+# (ruling R8: the AGENTS.md safety rule outranks the plan's fixed list).
+NON_APPROVED_PEPTIDES: list[str] = ["BPC-157", "BPC 157", "TB-500", "ipamorelin", "CJC-1295",
+                                    "body protection compound"]
 
-# Number (with optional decimal: "2.4", "7·2", "0,5") followed by a dose unit.
+# Number (with optional decimal: "2.4", "7·2", "0,5") followed by a dose unit,
+# abbreviated or spelled out, including injection volumes (mL, cc).
 DOSE_PATTERN: re.Pattern = re.compile(
-    r"\d+(?:[.,·]\d+)?\s*(?:mg|mcg|µg|μg|ug|units?|iu)\b", re.IGNORECASE)
+    r"\d+(?:[.,·]\d+)?\s*(?:mg|mcg|µg|μg|ug|units?|iu|milligrams?|micrograms?|ml|cc)\b",
+    re.IGNORECASE)
 
 REDACTION = "[removed: dosing for a non-approved peptide]"
 WINDOW = 120

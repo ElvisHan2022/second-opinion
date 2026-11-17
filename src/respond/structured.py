@@ -98,8 +98,16 @@ def study_size(source: Source) -> int | None:
     return extract_study_size(source.text)
 
 
+REDACTED_FIELDS = ("text", "finding", "recommendation", "public_conclusion")
+
+
 def _redacted(result: dict) -> dict:
-    result["text"], result["redacted"] = redact_dosing(result["text"])
+    """Run every free-text field through redact_dosing; `redacted` is True if any changed."""
+    result["redacted"] = False
+    for key in REDACTED_FIELDS:
+        if isinstance(result.get(key), str):
+            result[key], hit = redact_dosing(result[key])
+            result["redacted"] |= hit
     return result
 
 

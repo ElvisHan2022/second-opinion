@@ -12,6 +12,7 @@ Kordi is the team's collaboration layer and the record of trust ratings. This pr
    - `credence-ratings`: the team plus stakeholder raters (physicians, nurses, dietitians, engineers, public users). Plans are posted here and rated.
 5. **Documents.** Attach to `credence-build`: `SPEC.md`, `AGENTS.md`, `docs/01_project_brief.md`, `docs/03_evidence_grading_rubric.md`, `docs/06_trust_evaluation_loop.md`, this file. Attach only `docs/01_project_brief.md` and the rating instructions (section 4) to `credence-ratings`.
 6. **Local agent workspace.** In a Mac agent chat, reference the repo folder once, for example `@~/hackathon/wellness-coach`, to select it as the working directory. The selection persists for that session.
+7. **Agent files.** One markdown file per agent (role, trigger, memory bullets, outputs) is in `kordi/agents/README.md`; attach them to `credence-build` and import each file's memory bullets into its owner's agent.
 
 ## 2. Keep context retrievable
 

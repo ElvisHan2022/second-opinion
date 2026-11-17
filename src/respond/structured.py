@@ -27,11 +27,11 @@ STANCES = {"supports", "opposes", "cautions"}
 TOPIC_KEYS = ["id", "topic", "finding", "recommendation", "public_conclusion", "stances"]
 
 CLINICAL_TEMPLATE = ("From {sources} sources (most reputable), we identified {n_studies} {studies_word} "
-                     "with study sizes of {sizes}, with the main finding that {finding}. "
+                     "with {sizes}, with the main finding that {finding}. "
                      "Thus, we recommend {recommendation}.")
 # No tagged clinical source: no finding and no recommendation (every recommendation needs a source).
 CLINICAL_NONE = "We identified no studies in our clinical sources that test this claim."
-PUBLIC_TEMPLATE = ("Across {platforms}, we identified {n_support} {posts_word} supporting "
+PUBLIC_TEMPLATE = ("{lead} {platforms}, we identified {n_support} {posts_word} supporting "
                    "the conclusion that {public_conclusion}.")
 PUBLIC_DISPUTED = " {n_oppose} {posts_word2} disputed it."
 PUBLIC_NONE = "We identified no public posts on the conclusion that {public_conclusion}."
@@ -156,18 +156,15 @@ def extract_study_size(text: str) -> int | None:
 
 
 def _sizes_text(sizes: list[int | None]) -> str:
-    """Up to 4 sizes as a list; more as "{n} reported sizes from {min} to {max} and {k} not reported"."""
-    if len(sizes) <= MAX_LISTED_SIZES:
-        return _join([_size_text(x) for x in sizes])
+    """Full size phrase: a list for up to 4 studies, else a compact range."""
     reported = [x for x in sizes if x is not None]
     missing = len(sizes) - len(reported)
     if not reported:
-        return f"size not reported for all {len(sizes)} studies"
-    if len(reported) == 1:
-        text = f"1 reported size of {reported[0]:,}"
-    else:
-        text = f"{len(reported)} reported sizes from {min(reported):,} to {max(reported):,}"
-    return text + (f" and {missing} not reported" if missing else "")
+        return "study sizes not reported" if len(sizes) > 1 else "study size not reported"
+    if len(sizes) <= MAX_LISTED_SIZES:
+        return f"{_plural(len(sizes), 'study size', 'study sizes')} of {_join([_size_text(x) for x in sizes])}"
+    text = f"study sizes ranging from {min(reported):,} to {max(reported):,}"
+    return text + (f" ({missing} not reported)" if missing else "")
 
 
 def clinical_response(topic: dict, sources: list[Source]) -> dict:
@@ -209,7 +206,7 @@ def public_response(topic: dict, posts: list[Source]) -> dict:
     platforms = list(dict.fromkeys(p.platform for p in counted))
     if counted:
         text = PUBLIC_TEMPLATE.format(
-            platforms=_join(platforms), n_support=n_support,
+            lead="On" if len(platforms) == 1 else "Across", platforms=_join(platforms), n_support=n_support,
             posts_word=_plural(n_support, "post", "posts"),
             public_conclusion=topic["public_conclusion"])
         if n_oppose:

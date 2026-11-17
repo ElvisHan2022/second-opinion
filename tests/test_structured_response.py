@@ -133,7 +133,7 @@ def test_long_size_lists_are_compacted():
              "We enrolled 300 adults.", "x"]
     srcs = [_clinical(f"s{i}", "Obesity", t, ["Randomized Controlled Trial"]) for i, t in enumerate(texts)]
     res = clinical_response(_topic({s.id: "supports" for s in srcs}), srcs)
-    assert ("with study sizes of 4 reported sizes from 160 to 12,000 and 2 not reported, "
+    assert ("with study sizes ranging from 160 to 12,000 (2 not reported), "
             "with the main finding") in res["text"]
     assert res["study_sizes"] == [1961, 160, None, 12000, 300, None]
     # Four or fewer keep the list.
@@ -142,7 +142,7 @@ def test_long_size_lists_are_compacted():
     # More than four, all reported: no "not reported" suffix.
     full = [s for s in srcs if s.text != "x"] + [_clinical("s9", "Obesity", "We enrolled 50 adults.", [])]
     res5 = clinical_response(_topic({s.id: "supports" for s in full}), full)
-    assert "study sizes of 5 reported sizes from 50 to 12,000, with" in res5["text"]
+    assert "study sizes ranging from 50 to 12,000, with" in res5["text"]
 
 
 def test_public_template_exact():
@@ -157,7 +157,7 @@ def test_public_template_exact():
 def test_public_no_disputed_clause_when_no_opposition():
     posts = [_post("p1", "Reddit"), _post("p2", "Reddit")]
     res = public_response(_topic({"p1": "supports", "p2": "supports"}), posts)
-    assert res["text"] == "Across Reddit, we identified 2 posts supporting the conclusion that Z."
+    assert res["text"] == "On Reddit, we identified 2 posts supporting the conclusion that Z."
 
 
 def test_public_cautions_not_counted():
@@ -165,7 +165,7 @@ def test_public_cautions_not_counted():
     res = public_response(_topic({"p1": "supports", "p2": "cautions"}), posts)
     assert (res["n_support"], res["n_oppose"], res["n_synthetic"]) == (1, 0, 1)
     assert res["platforms"] == ["Reddit"]
-    assert res["text"] == "Across Reddit, we identified 1 post supporting the conclusion that Z."
+    assert res["text"] == "On Reddit, we identified 1 post supporting the conclusion that Z."
 
 
 def test_narrative_review_size_not_reported():
@@ -330,3 +330,10 @@ def test_compose_all_shape():
         assert t["clinical"]["text"] and t["public"]["text"]
         assert t["clinical"]["topic_id"] == t["public"]["topic_id"] == t["topic_id"]
         assert len(t["clinical"]["study_sizes"]) == t["clinical"]["n_studies"]
+
+
+def test_sizes_wording_none_reported_and_single_platform():
+    srcs = [_clinical(f"s{i}", "Obesity", "x", ["Review"]) for i in range(5)]
+    res = clinical_response(_topic({s.id: "supports" for s in srcs}), srcs)
+    assert "with study sizes not reported, with the main finding" in res["text"]
+    assert "sizes of" not in res["text"]

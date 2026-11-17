@@ -1,6 +1,31 @@
 {
-  "_note": "Hand-tagged claim topics for the structured response composer. finding and recommendation are hand-written placeholders pending the M3 generator; replace them with generator output later. Stances were tagged by reading each source: supports = the source backs the topic claim; opposes = it contradicts the claim; cautions = it partly backs the claim or questions it with a material caveat (animal-only data, no human trials, lean mass not the same as muscle). Untagged sources do not address the claim. Public posts pub-01..pub-16 are SYNTHETIC placeholders, not real people or quotes. No dosing for non-approved peptides may appear here; for FDA-approved GLP-1s, follow the prescriber.",
+  "_note": "Hand-tagged claim topics for the structured response composer. finding and recommendation are hand-written placeholders pending the M3 generator; replace them with generator output later. Stances were tagged by reading each source: supports = the source backs the topic claim; opposes = it contradicts the claim; cautions = it partly backs the claim or questions it with a material caveat (animal-only data, no human trials, lean mass not the same as muscle). Untagged sources do not address the claim. The composer shows a finding and recommendation only when at least one clinical source is tagged supports or cautions; public sentences count supports and opposes only. Public posts pub-01..pub-16 are SYNTHETIC placeholders, not real people or quotes. No dosing for non-approved peptides may appear here; for FDA-approved GLP-1s, follow the prescriber.",
   "topics": [
+    {
+      "id": "t-glp1-weightloss",
+      "topic": "GLP-1 medications produce substantial weight loss",
+      "finding": "semaglutide and tirzepatide produce substantial, sustained weight loss compared with placebo in adults with obesity, with or without type 2 diabetes, and their most common side effects are gastrointestinal and mostly mild to moderate",
+      "recommendation": "taking your GLP-1 exactly as your prescriber directs and pairing it with resistance training and enough protein to help protect muscle as the weight comes off",
+      "public_conclusion": "GLP-1 medications lead to real weight loss",
+      "stances": {
+        "pmid-33567185": "supports",
+        "pmid-39536238": "supports",
+        "pmid-38912654": "supports",
+        "pmid-40353578": "supports",
+        "pmid-40961952": "supports",
+        "pmid-33667417": "supports",
+        "pmid-37385275": "supports",
+        "pmid-37385278": "supports",
+        "pmid-39996356": "supports",
+        "pmid-41068996": "supports",
+        "pmid-38687506": "supports",
+        "pmid-38937282": "supports",
+        "pmid-40281304": "supports",
+        "pmid-40914550": "supports",
+        "pub-06": "supports",
+        "pub-07": "supports"
+      }
+    },
     {
       "id": "t-resistance",
       "topic": "Resistance training preserves muscle during GLP-1 weight loss",
@@ -88,11 +113,10 @@
     {
       "id": "t-collagen",
       "topic": "Collagen peptides prevent muscle loss on a GLP-1",
-      "finding": "muscle protection during GLP-1 weight loss rests on adequate high-quality protein and resistance training, and none of our clinical sources tests collagen itself",
-      "recommendation": "relying on adequate high-quality protein and resistance training to protect muscle rather than on collagen peptides, and asking a dietitian if you are unsure which protein sources count",
+      "finding": "none of our clinical sources tests collagen peptides for muscle loss",
+      "recommendation": "nothing on collagen until a clinical source tests it; this text is not shown while no clinical source is tagged",
       "public_conclusion": "collagen peptides prevent muscle loss on a GLP-1",
       "stances": {
-        "pmid-39295512": "cautions",
         "pub-13": "supports"
       }
     }

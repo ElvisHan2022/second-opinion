@@ -24,8 +24,8 @@ TOPIC_KEYS = ["id", "topic", "finding", "recommendation", "public_conclusion", "
 CLINICAL_TEMPLATE = ("From {sources} sources (most reputable), we identified {n_studies} {studies_word} "
                      "with study sizes of {sizes}, with the main finding that {finding}. "
                      "Thus, we recommend {recommendation}.")
-CLINICAL_NONE = ("We identified no studies in our clinical sources that test this claim. "
-                 "Thus, we recommend {recommendation}.")
+# No tagged clinical source: no finding and no recommendation (every recommendation needs a source).
+CLINICAL_NONE = "We identified no studies in our clinical sources that test this claim."
 PUBLIC_TEMPLATE = ("Across {platforms}, we identified {n_support} {posts_word} supporting "
                    "the conclusion that {public_conclusion}.")
 PUBLIC_DISPUTED = " {n_oppose} {posts_word2} disputed it."
@@ -33,9 +33,11 @@ PUBLIC_NONE = "We identified no public posts on the conclusion that {public_conc
 
 # Publication types that rank a journal ahead of others (systematic review / meta-analysis / RCT).
 HIGH_TIER_TYPES = {"Systematic Review", "Meta-Analysis", "Randomized Controlled Trial"}
+# A narrative review quotes other studies' numbers; those are not its own sample.
+POOLED_REVIEW_TYPES = {"Systematic Review", "Meta-Analysis"}
 BADGE_RANK = {"NEJM": 0, "Lancet": 1}
 
-_NUM = r"\d{1,3}(?:[,  ]\d{3})+|\d+"  # 1,961 / 15<thin space>782 / 160
+_NUM = r"\d{1,3}(?:[,\u2009\u202f]\d{3})+|\d+"  # 1,961 / 15<thin space>782 / 160
 _SIZE_PATTERNS = [
     re.compile(rf"\bn\s*=\s*({_NUM})", re.IGNORECASE),
     re.compile(rf"\b({_NUM})\s+(?:participants|patients|adults|subjects|individuals|people|"
@@ -75,6 +77,14 @@ def _reputability_key(source: Source) -> tuple:
     return (badge_rank, tier_rank, journal_name(source).lower())
 
 
+def study_size(source: Source) -> int | None:
+    """Sample size for display; None for narrative reviews (Review without SR/MA)."""
+    types = set(source.publication_types)
+    if "Review" in types and not types & POOLED_REVIEW_TYPES:
+        return None
+    return extract_study_size(source.text)
+
+
 def _redacted(result: dict) -> dict:
     result["text"], result["redacted"] = redact_dosing(result["text"])
     return result
@@ -112,7 +122,7 @@ def clinical_response(topic: dict, sources: list[Source]) -> dict:
     picked = [s for s in sources if s.lane == "clinical" and stances.get(s.id) in ("supports", "cautions")]
     picked.sort(key=_reputability_key)  # stable: ties keep input order
     names = list(dict.fromkeys(journal_name(s) for s in picked))[:3]
-    sizes = [extract_study_size(s.text) for s in picked]
+    sizes = [study_size(s) for s in picked]
     n = len(picked)
     if n:
         text = CLINICAL_TEMPLATE.format(
@@ -120,23 +130,26 @@ def clinical_response(topic: dict, sources: list[Source]) -> dict:
             sizes=_join([_size_text(x) for x in sizes]),
             finding=topic["finding"], recommendation=topic["recommendation"])
     else:
-        text = CLINICAL_NONE.format(recommendation=topic["recommendation"])
+        text = CLINICAL_NONE
     return _redacted({
         "topic_id": topic["id"],
         "sources": [s.id for s in picked],
         "journals": names,
         "n_studies": n,
         "study_sizes": sizes,
-        "finding": topic["finding"],
-        "recommendation": topic["recommendation"],
+        "finding": topic["finding"] if n else None,
+        "recommendation": topic["recommendation"] if n else None,
         "text": text,
     })
 
 
 def public_response(topic: dict, posts: list[Source]) -> dict:
-    """Public sentence: posts tagged `supports` back the conclusion; `opposes` or `cautions` dispute it."""
+    """Public sentence: `supports` posts back the conclusion, `opposes` posts dispute it.
+
+    `cautions` posts are not counted in either number (nor in platforms or n_synthetic).
+    """
     stances = topic["stances"]
-    counted = [p for p in posts if p.lane == "public" and stances.get(p.id) in STANCES]
+    counted = [p for p in posts if p.lane == "public" and stances.get(p.id) in ("supports", "opposes")]
     n_support = sum(stances[p.id] == "supports" for p in counted)
     n_oppose = len(counted) - n_support
     platforms = list(dict.fromkeys(p.platform for p in counted))

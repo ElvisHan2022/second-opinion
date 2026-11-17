@@ -15,7 +15,7 @@ from src.retrieval.public import load_posts
 from src.safety import DOSE_PATTERN, NON_APPROVED_PEPTIDES, redact_dosing
 from src.schemas import Source
 
-TOPIC_IDS = ["t-resistance", "t-protein", "t-leanmass", "t-bpc-muscle", "t-bpc-safety", "t-collagen"]
+TOPIC_IDS = ["t-glp1-weightloss", "t-resistance", "t-protein", "t-leanmass", "t-bpc-muscle", "t-bpc-safety", "t-collagen"]
 
 
 def _clinical(sid, abbrev, text, ptypes):
@@ -56,7 +56,7 @@ def test_extract_study_size():
 
 def test_extract_study_size_thin_space_thousands():
     # PubMed abstracts sometimes use a thin space as the thousands separator.
-    assert extract_study_size("Twenty RCTs comprising 15 782 participants") == 15782
+    assert extract_study_size("Twenty RCTs comprising 15\u2009782 participants") == 15782
 
 
 # ------------------------------------------------------------- templates
@@ -113,11 +113,23 @@ def test_public_no_disputed_clause_when_no_opposition():
     assert res["text"] == "Across Reddit, we identified 2 posts supporting the conclusion that Z."
 
 
-def test_public_cautions_count_as_disputed():
+def test_public_cautions_not_counted():
     posts = [_post("p1", "Reddit"), _post("p2", "X")]
     res = public_response(_topic({"p1": "supports", "p2": "cautions"}), posts)
-    assert res["n_oppose"] == 1
-    assert res["text"].endswith(" 1 post disputed it.")
+    assert (res["n_support"], res["n_oppose"], res["n_synthetic"]) == (1, 0, 1)
+    assert res["platforms"] == ["Reddit"]
+    assert res["text"] == "Across Reddit, we identified 1 post supporting the conclusion that Z."
+
+
+def test_narrative_review_size_not_reported():
+    narrative = _clinical("nr", "Obes Rev", "Trials enrolled 1,961 adults.", ["Journal Article", "Review"])
+    sr = _clinical("sr", "Obes Rev", "Pooled 2,000 participants.", ["Review", "Systematic Review"])
+    ma = _clinical("ma", "Obes Rev", "Pooled 3,000 participants.", ["Meta-Analysis"])
+    rct = _clinical("rct", "Obes Rev", "We randomized 400 adults.", ["Randomized Controlled Trial"])
+    srcs = [narrative, sr, ma, rct]
+    res = clinical_response(_topic({s.id: "supports" for s in srcs}), srcs)
+    sizes = dict(zip(res["sources"], res["study_sizes"]))
+    assert sizes == {"nr": None, "sr": 2000, "ma": 3000, "rct": 400}
 
 
 def test_singular_words():
@@ -131,8 +143,9 @@ def test_singular_words():
 def test_zero_matches_fall_back_to_plain_sentences():
     res = clinical_response(_topic({}), [_clinical("s1", "Obesity", "x", ["Review"])])
     assert res["n_studies"] == 0
-    assert "0 studies with study sizes" not in res["text"]
-    assert res["text"].endswith("Thus, we recommend Y.")
+    # No source, no recommendation.
+    assert res["text"] == "We identified no studies in our clinical sources that test this claim."
+    assert res["recommendation"] is None and res["finding"] is None
     pub = public_response(_topic({}), [_post("p1", "Reddit")])
     assert pub["n_support"] == pub["n_oppose"] == 0
     assert "Across ," not in pub["text"]
@@ -165,7 +178,18 @@ def test_recommendations_never_contain_peptide_dosing():
     for topic in compose_all():
         for lane in ("clinical", "public"):
             assert not _dosing_near_peptide(topic[lane]["text"]), (topic["topic_id"], lane)
-        assert not DOSE_PATTERN.search(topic["clinical"]["recommendation"])
+        assert not DOSE_PATTERN.search(topic["clinical"]["recommendation"] or "")
+
+
+def test_weightloss_topic_cites_nejm_and_lancet():
+    by_id = {t["topic_id"]: t for t in compose_all()}
+    assert by_id["t-glp1-weightloss"]["clinical"]["text"].startswith("From NEJM, Lancet and ")
+
+
+def test_collagen_has_no_unsourced_recommendation():
+    clin = {t["topic_id"]: t for t in compose_all()}["t-collagen"]["clinical"]
+    assert clin["n_studies"] == 0 and clin["recommendation"] is None
+    assert "recommend" not in clin["text"]
 
 
 def test_bpc_topic_refers_to_clinician():

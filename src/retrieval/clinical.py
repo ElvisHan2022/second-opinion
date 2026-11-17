@@ -30,7 +30,8 @@ EUTILS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 DEMO_QUERIES = {
     "glp1_lean_mass": '(semaglutide OR tirzepatide OR "GLP-1 receptor agonist") AND ("lean mass" OR "fat-free mass" OR "muscle mass")',
     "exercise_protein_glp1": '("GLP-1 receptor agonist" OR semaglutide OR liraglutide) AND ("resistance training" OR exercise OR "protein intake") AND (muscle OR "lean mass")',
-    "nejm_lancet": '("lean mass" OR "fat-free mass" OR "muscle mass" OR "resistance training" OR exercise) AND '
+    "nejm_lancet": '(semaglutide OR tirzepatide OR liraglutide OR "GLP-1 receptor agonist") AND '
+                   '(obesity OR overweight OR "weight loss" OR "body composition" OR "lean mass") AND '
                    '("N Engl J Med"[ta] OR "Lancet"[ta] OR "Lancet Diabetes Endocrinol"[ta])',
     "bpc157": '"BPC-157" OR "BPC 157" OR "body protection compound"',
 }

@@ -104,8 +104,9 @@ def test_clinical_snapshot_covers_bpc157():
     assert any("BPC" in s.title for s in load_snapshot())
 
 
-def test_snapshot_includes_nejm_or_lancet():
-    assert any(journal_badge(s) in {"NEJM", "Lancet"} for s in load_snapshot())
+def test_snapshot_includes_nejm_and_lancet():
+    badges = {journal_badge(s) for s in load_snapshot()}
+    assert {"NEJM", "Lancet"} <= badges
 
 
 def test_clinical_sources_have_journal_fields():

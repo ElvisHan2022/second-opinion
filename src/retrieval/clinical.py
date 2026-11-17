@@ -27,12 +27,13 @@ SNAPSHOT = ROOT / "data" / "fixtures" / "clinical_sources.json"
 EUTILS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 
 # Demo question: avoiding muscle loss on semaglutide, and whether to add BPC-157.
+GLP1_OBESITY = ('(semaglutide OR tirzepatide OR liraglutide OR "GLP-1 receptor agonist") AND '
+                '(obesity OR overweight OR "weight loss" OR "body composition" OR "lean mass")')
 DEMO_QUERIES = {
     "glp1_lean_mass": '(semaglutide OR tirzepatide OR "GLP-1 receptor agonist") AND ("lean mass" OR "fat-free mass" OR "muscle mass")',
     "exercise_protein_glp1": '("GLP-1 receptor agonist" OR semaglutide OR liraglutide) AND ("resistance training" OR exercise OR "protein intake") AND (muscle OR "lean mass")',
-    "nejm_lancet": '(semaglutide OR tirzepatide OR liraglutide OR "GLP-1 receptor agonist") AND '
-                   '(obesity OR overweight OR "weight loss" OR "body composition" OR "lean mass") AND '
-                   '("N Engl J Med"[ta] OR "Lancet"[ta] OR "Lancet Diabetes Endocrinol"[ta])',
+    "nejm": f'{GLP1_OBESITY} AND "N Engl J Med"[ta]',
+    "lancet": f'{GLP1_OBESITY} AND ("Lancet"[ta] OR "Lancet Diabetes Endocrinol"[ta])',
     "bpc157": '"BPC-157" OR "BPC 157" OR "body protection compound"',
 }
 PER_QUERY = 5

@@ -1,5 +1,5 @@
 {
-  "_note": "Hand-tagged claim topics for the structured response composer. finding and recommendation are hand-written placeholders pending the M3 generator; replace them with generator output later. Stances were tagged by reading each source: supports = the source backs the topic claim; opposes = it contradicts the claim; cautions = it partly backs the claim or questions it with a material caveat (animal-only data, no human trials, lean mass not the same as muscle). Untagged sources do not address the claim. The composer shows a finding and recommendation only when at least one clinical source is tagged supports or cautions; public sentences count supports and opposes only. Public posts pub-01..pub-16 are SYNTHETIC placeholders, not real people or quotes. No dosing for non-approved peptides may appear here; for FDA-approved GLP-1s, follow the prescriber.",
+  "_note": "Hand-tagged claim topics for the structured response composer. finding and recommendation are hand-written placeholders pending the M3 generator; replace them with generator output later. Stances were tagged by reading each source: supports = the source backs the topic claim; opposes = it contradicts the claim; cautions = it partly backs the claim or questions it with a material caveat (animal-only data, no human trials, lean mass not the same as muscle). Untagged sources do not address the claim. The composer shows a finding and recommendation only when at least one clinical source is tagged supports or cautions; public sentences count supports and opposes only. Public posts real-01..real-24 are REAL public posts (Google result snippets collected 2026-11-16, paraphrased; credentials self-described and unverified); their stances come from the collector's topic_stances hints, checked against each post's claim and text. A topic with no real public stance shows the public fallback sentence. No dosing for non-approved peptides may appear here; for FDA-approved GLP-1s, follow the prescriber.",
   "topics": [
     {
       "id": "t-glp1-weightloss",
@@ -20,8 +20,7 @@
         "pmid-41068996": "supports",
         "pmid-38687506": "supports",
         "pmid-38937282": "supports",
-        "pmid-40281304": "supports",
-        "pub-07": "supports"
+        "pmid-40281304": "supports"
       }
     },
     {
@@ -34,12 +33,12 @@
         "pmid-38687506": "supports",
         "pmid-39295512": "supports",
         "pmid-41877354": "supports",
-        "pub-01": "supports",
-        "pub-02": "supports",
-        "pub-05": "supports",
-        "pub-07": "supports",
-        "pub-08": "supports",
-        "pub-16": "supports"
+        "real-01": "supports",
+        "real-04": "supports",
+        "real-06": "supports",
+        "real-08": "supports",
+        "real-17": "supports",
+        "real-23": "supports"
       }
     },
     {
@@ -51,10 +50,12 @@
       "stances": {
         "pmid-39295512": "supports",
         "pmid-41877354": "supports",
-        "pub-01": "supports",
-        "pub-03": "supports",
-        "pub-07": "supports",
-        "pub-10": "supports"
+        "real-01": "supports",
+        "real-04": "supports",
+        "real-05": "supports",
+        "real-06": "supports",
+        "real-08": "supports",
+        "real-17": "supports"
       }
     },
     {
@@ -70,10 +71,13 @@
         "pmid-39295512": "supports",
         "pmid-38937282": "cautions",
         "pmid-41068996": "cautions",
-        "pub-01": "supports",
-        "pub-05": "supports",
-        "pub-07": "supports",
-        "pub-08": "cautions"
+        "real-03": "supports",
+        "real-04": "supports",
+        "real-07": "supports",
+        "real-08": "supports",
+        "real-09": "supports",
+        "real-13": "supports",
+        "real-20": "supports"
       }
     },
     {
@@ -86,11 +90,20 @@
         "pmid-40756949": "cautions",
         "pmid-30915550": "cautions",
         "pmid-40005999": "cautions",
-        "pub-04": "supports",
-        "pub-06": "supports",
-        "pub-09": "opposes",
-        "pub-11": "cautions",
-        "pub-12": "opposes"
+        "real-02": "supports",
+        "real-03": "supports",
+        "real-11": "cautions",
+        "real-12": "supports",
+        "real-14": "cautions",
+        "real-15": "opposes",
+        "real-16": "opposes",
+        "real-17": "opposes",
+        "real-18": "opposes",
+        "real-19": "cautions",
+        "real-21": "opposes",
+        "real-22": "supports",
+        "real-23": "supports",
+        "real-24": "supports"
       }
     },
     {
@@ -103,9 +116,8 @@
         "pmid-40756949": "supports",
         "pmid-40005999": "supports",
         "pmid-30915550": "cautions",
-        "pub-09": "supports",
-        "pub-11": "supports",
-        "pub-12": "supports"
+        "real-10": "supports",
+        "real-15": "supports"
       }
     },
     {
@@ -114,9 +126,7 @@
       "finding": "none of our clinical sources tests collagen peptides for muscle loss",
       "recommendation": "nothing on collagen until a clinical source tests it; this text is not shown while no clinical source is tagged",
       "public_conclusion": "collagen peptides prevent muscle loss on a GLP-1",
-      "stances": {
-        "pub-13": "supports"
-      }
+      "stances": {}
     }
   ]
 }

@@ -13,6 +13,8 @@ COVERAGE: dict[str, set[str]] = {
     "primary care": {"obesity medicine"},
     "obesity medicine": {"nutrition", "exercise science"},
     "sports medicine": {"exercise science"},
+    # Ruling R11: a general medical credential covers medical claims.
+    "medicine": {"obesity medicine", "pharmacology", "primary care", "sports medicine", "internal medicine"},
     "chiropractic": set(),
     "personal training": set(),
 }

@@ -46,6 +46,19 @@ def test_covers_coverage_map():
     assert not covers("obesity medicine", None)
 
 
+def test_general_medical_credential_covers_medical_claims():
+    """Ruling R11: a general medical credential covers medical claim fields."""
+    src = dataclasses.replace(_post("pub-01"), speaker_credential="MD (self-described)",
+                              credential_field="medicine", claim_field="pharmacology",
+                              cites_evidence=False)
+    assert classify_expert(src) == ("expert_opinion", False)
+    for field in ("obesity medicine", "pharmacology", "primary care", "sports medicine", "internal medicine"):
+        assert covers("medicine", field), field
+    # Non-medical credentials stay out of field.
+    assert not covers("chiropractic", "pharmacology")
+    assert not covers("personal training", "pharmacology")
+
+
 def test_clinical_sources_are_expert_evidence():
     sources = load_snapshot()
     assert sources

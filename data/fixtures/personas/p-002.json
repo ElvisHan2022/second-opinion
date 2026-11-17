@@ -1,0 +1,29 @@
+{
+  "user_id": "p-002",
+  "synthetic": true,
+  "age": 42,
+  "sex": "female",
+  "demo_question": "How do I avoid losing muscle on semaglutide, and should I add a peptide like BPC-157?",
+  "goals": [
+    "continue fat loss",
+    "preserve muscle mass and strength"
+  ],
+  "conditions": [
+    "obesity"
+  ],
+  "medications": [
+    {"name": "semaglutide", "approved": true}
+  ],
+  "supplements_peptides": [
+    {"name": "BPC-157", "source": "seen promoted on social media; considering it, not bought, not started", "fda_approved": false}
+  ],
+  "risk_tolerance": 3,
+  "readiness_to_act": 3,
+  "source_trust": {
+    "doctor": 4,
+    "physician_creator": 4,
+    "coach": 3,
+    "reddit": 3,
+    "influencer": 2
+  }
+}

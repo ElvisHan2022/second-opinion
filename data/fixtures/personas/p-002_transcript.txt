@@ -1,0 +1,22 @@
+# SYNTHETIC intake transcript. Fictional person; no real health information.
+# persona_id: p-002
+# demo question: How do I avoid losing muscle on semaglutide, and should I add a peptide like BPC-157?
+
+Agent: Thanks for talking with me. To start, what would you most like help with right now?
+User: I'm 42 and I've been on semaglutide for about three months for weight management. The weight is coming off, which I'm happy about, but I keep reading that people lose muscle on these drugs and I don't want that to be me.
+Agent: Got it. Who prescribed the semaglutide?
+User: My doctor prescribed it, and I get it from a regular pharmacy.
+Agent: Do you have diabetes or prediabetes, or any other health conditions?
+User: No diabetes and no prediabetes. My blood sugar has always been normal. It's just my weight; otherwise I'm healthy.
+Agent: Are you taking any other prescription medications?
+User: No, semaglutide is the only one.
+Agent: Any supplements, peptides or other products?
+User: Not right now. But I keep seeing BPC-157 on Instagram and TikTok, people saying it helps you keep muscle while you're on a GLP-1. I'm thinking about it. I haven't bought it or started it.
+Agent: Thanks for telling me. How do you usually feel about trying new things for your health? One is very cautious, five is happy to experiment.
+User: A three. I'm open to things, but I want to know they're safe first.
+Agent: And how ready are you to change something this week? One is just exploring, five is ready right now.
+User: Three. I'd like to understand my options before I commit to anything.
+Agent: When it comes to health advice, how much do you trust each of these, one to five: your own doctor, doctors who post online, fitness coaches, Reddit, and influencers?
+User: My doctor, four. Doctors online, also four, if they explain the evidence. Coaches, three. Reddit, three, it's useful for real experiences. Influencers, two, a lot of them are selling something.
+Agent: What does a good outcome look like in six months?
+User: Still losing fat, but keeping my muscle and my strength. I want to feel strong, not just smaller.

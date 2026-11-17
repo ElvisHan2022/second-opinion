@@ -2,7 +2,11 @@
 
 For each topic in data/fixtures/claim_topics.json:
 - clinical sentence: summarises clinical sources tagged `supports` or `cautions`;
-- public sentence: summarises the "court of public opinion" from public posts.
+- public sentence: summarises the "court of public opinion" from public posts
+  (by default the real posts in data/fixtures/public_posts_real.json).
+
+Clinical sources are first filtered to the persona (`persona_filter`): a persona
+without diabetes does not see trials run in type 2 diabetes populations.
 
 `finding` and `recommendation` are hand-written in the fixture today; an M3
 generator may fill them later. Every sentence passes through `redact_dosing`.
@@ -13,9 +17,10 @@ import json
 import re
 from pathlib import Path
 
+from src.intake.persona import load_persona
 from src.retrieval import clinical, public
 from src.safety import redact_dosing
-from src.schemas import Source
+from src.schemas import Persona, Source
 
 TOPICS = Path(__file__).resolve().parents[2] / "data" / "fixtures" / "claim_topics.json"
 STANCES = {"supports", "opposes", "cautions"}
@@ -223,11 +228,50 @@ def public_response(topic: dict, posts: list[Source]) -> dict:
     })
 
 
-def compose_all() -> list[dict]:
-    sources, posts = clinical.load_snapshot(), public.load_posts()
+EXCLUDE_T2D_REASON = "type 2 diabetes population; persona has no diabetes"
+# "diabetes" but not "prediabetes" / "pre-diabetes": prediabetes does not count as diabetes.
+_HAS_DIABETES = re.compile(r"(?<!pre)(?<!pre-)\bdiabetes\b", re.IGNORECASE)
+
+
+def _has_diabetes(persona: Persona) -> bool:
+    return any(_HAS_DIABETES.search(c) for c in persona.conditions)
+
+
+def _t2d_population_title(title: str) -> bool:
+    """Title names a type 2 diabetes population (not "without diabetes", not "diabetes prevention")."""
+    t = title.lower()
+    if "type 2 diabetes" not in t or "without diabetes" in t:
+        return False
+    # Drop "type 2 diabetes prevention" phrases; any remaining mention is a T2D population.
+    return "type 2 diabetes" in t.replace("type 2 diabetes prevention", "")
+
+
+def persona_filter(sources: list[Source], persona: Persona) -> tuple[list[Source], list[dict]]:
+    """Drop clinical sources whose population does not match the persona.
+
+    A persona with no diabetes does not get trials run in type 2 diabetes populations.
+    Returns (kept, excluded); each excluded item is {"id", "title", "reason"}.
+    """
+    if _has_diabetes(persona):
+        return list(sources), []
+    kept, excluded = [], []
+    for s in sources:
+        if s.lane == "clinical" and _t2d_population_title(s.title):
+            excluded.append({"id": s.id, "title": s.title, "reason": EXCLUDE_T2D_REASON})
+        else:
+            kept.append(s)
+    return kept, excluded
+
+
+def compose_all(persona: Persona | None = None, posts: list[Source] | None = None) -> list[dict]:
+    """Both sentences for every topic; defaults are the demo persona p-002 and the real posts."""
+    persona = persona or load_persona("p-002")
+    posts = public.load_posts(public.REAL_POSTS) if posts is None else posts
+    sources, excluded = persona_filter(clinical.load_snapshot(), persona)
     return [{"topic_id": t["id"], "topic": t["topic"],
              "clinical": clinical_response(t, sources),
-             "public": public_response(t, posts)}
+             "public": public_response(t, posts),
+             "excluded_for_persona": [e for e in excluded if e["id"] in t["stances"]]}
             for t in load_topics()]
 
 

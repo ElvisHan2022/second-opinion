@@ -11,7 +11,7 @@ from src.respond.structured import (
     public_response,
 )
 from src.retrieval.clinical import load_snapshot
-from src.retrieval.public import load_posts
+from src.retrieval.public import REAL_POSTS, load_posts
 from src.safety import DOSE_PATTERN, NON_APPROVED_PEPTIDES, redact_dosing
 from src.schemas import Source
 
@@ -204,8 +204,7 @@ def test_public_counts_synthetic_posts():
     res = public_response(_topic({"p1": "supports", "p2": "supports", "p3": "opposes"}), posts)
     assert res["n_synthetic"] == 2
     for topic in compose_all():
-        pub = topic["public"]
-        assert pub["n_synthetic"] == pub["n_support"] + pub["n_oppose"]  # fixture posts are all synthetic
+        assert topic["public"]["n_synthetic"] == 0, topic["topic_id"]  # the demo lane is real posts
 
 
 # ------------------------------------------------------------- fixture + safety
@@ -213,9 +212,10 @@ def test_public_counts_synthetic_posts():
 def test_topics_fixture_ids_and_stance_targets():
     topics = load_topics()
     assert [t["id"] for t in topics] == TOPIC_IDS
-    known = {s.id for s in load_snapshot()} | {p.id for p in load_posts()}
+    known = {s.id for s in load_snapshot()} | {p.id for p in load_posts(REAL_POSTS)}
     for t in topics:
         assert set(t["stances"]) <= known, f"{t['id']} tags unknown source ids"
+        assert not any(sid.startswith("pub-") for sid in t["stances"]), f"{t['id']} still tags synthetic posts"
         assert set(t["stances"].values()) <= {"supports", "opposes", "cautions"}
         for field in ("finding", "recommendation"):
             assert t[field][0].islower() and not t[field].endswith("."), (t["id"], field)
@@ -245,6 +245,23 @@ def test_bpc_topic_refers_to_clinician():
         text = by_id[tid]["clinical"]["text"]
         assert "clinician" in text or "prescriber" in text, tid
         assert "not FDA-approved" in text, tid
+
+
+def test_resistance_supported_by_medicine_and_public():
+    t = {t["topic_id"]: t for t in compose_all()}["t-resistance"]
+    assert t["clinical"]["n_studies"] >= 1
+    assert t["public"]["n_support"] > 0 and t["public"]["n_oppose"] == 0
+
+
+def test_bpc_muscle_public_side_leans_supportive():
+    pub = {t["topic_id"]: t for t in compose_all()}["t-bpc-muscle"]["public"]
+    assert pub["n_support"] > pub["n_oppose"] > 0
+
+
+def test_topics_without_real_posts_use_public_fallback():
+    by_id = {t["topic_id"]: t for t in compose_all()}
+    for tid in ("t-glp1-weightloss", "t-collagen"):
+        assert by_id[tid]["public"]["text"].startswith("We identified no public posts"), tid
 
 
 def test_redact_dosing():

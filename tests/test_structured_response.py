@@ -1,0 +1,208 @@
+"""M3 structured response composer: two fixed-template sentences per claim topic."""
+import re
+
+import pytest
+
+from src.respond.structured import (
+    clinical_response,
+    compose_all,
+    extract_study_size,
+    load_topics,
+    public_response,
+)
+from src.retrieval.clinical import load_snapshot
+from src.retrieval.public import load_posts
+from src.safety import DOSE_PATTERN, NON_APPROVED_PEPTIDES, redact_dosing
+from src.schemas import Source
+
+TOPIC_IDS = ["t-resistance", "t-protein", "t-leanmass", "t-bpc-muscle", "t-bpc-safety", "t-collagen"]
+
+
+def _clinical(sid, abbrev, text, ptypes):
+    return Source(id=sid, lane="clinical", title=f"title {sid}", url=None, speaker="A et al.",
+                  speaker_credential="peer-reviewed publication", platform="PubMed",
+                  cites_evidence=True, coi="unknown", text=text, publication_types=ptypes,
+                  journal=abbrev, journal_abbrev=abbrev)
+
+
+def _post(pid, platform, synthetic=True):
+    return Source(id=pid, lane="public", title=pid, url=None, speaker="someone",
+                  speaker_credential=None, platform=platform, cites_evidence=False,
+                  coi="unknown", text="a post", synthetic=synthetic)
+
+
+def _topic(stances):
+    return {"id": "t-x", "topic": "x", "finding": "X", "recommendation": "Y",
+            "public_conclusion": "Z", "stances": stances}
+
+
+def _dosing_near_peptide(text):
+    for m in DOSE_PATTERN.finditer(text):
+        window = text[max(0, m.start() - 120): m.end() + 120].lower()
+        if any(p.lower() in window for p in NON_APPROVED_PEPTIDES):
+            return True
+    return False
+
+
+# ------------------------------------------------------------- study size
+
+def test_extract_study_size():
+    assert extract_study_size("randomized 1,961 adults") == 1961
+    assert extract_study_size("(n = 304)") == 304
+    assert extract_study_size("N=12 and 2,539 participants") == 2539
+    assert extract_study_size("a review of trials") is None
+    assert extract_study_size("in 3 patients") is None
+
+
+def test_extract_study_size_thin_space_thousands():
+    # PubMed abstracts sometimes use a thin space as the thousands separator.
+    assert extract_study_size("Twenty RCTs comprising 15 782 participants") == 15782
+
+
+# ------------------------------------------------------------- templates
+
+def test_clinical_template_exact():
+    obesity = _clinical("s-ob", "Obesity", "A review of trials.", ["Journal Article", "Review"])
+    nejm = _clinical("s-nejm", "N Engl J Med", "We randomized 1,961 adults.",
+                     ["Journal Article", "Randomized Controlled Trial"])
+    res = clinical_response(_topic({"s-ob": "cautions", "s-nejm": "supports"}), [obesity, nejm])
+    assert res["text"] == ("From NEJM and Obesity sources (most reputable), we identified 2 studies "
+                           "with study sizes of 1,961 and size not reported, with the main finding "
+                           "that X. Thus, we recommend Y.")
+    assert res["n_studies"] == 2
+    assert res["study_sizes"] == [1961, None]
+    assert res["sources"] == ["s-nejm", "s-ob"]
+    assert res["redacted"] is False
+
+
+def test_clinical_skips_opposes_and_untagged():
+    a = _clinical("a", "Obesity", "120 adults", ["Review"])
+    b = _clinical("b", "Obesity", "300 adults", ["Review"])
+    c = _clinical("c", "Obesity", "400 adults", ["Review"])
+    res = clinical_response(_topic({"a": "supports", "b": "opposes"}), [a, b, c])
+    assert res["sources"] == ["a"]
+    assert res["n_studies"] == 1
+
+
+def test_clinical_journal_names_distinct_capped_and_ordered():
+    srcs = [
+        _clinical("o1", "Obes Rev", "x", ["Review"]),
+        _clinical("d1", "Diabetes Care", "x", ["Review"]),
+        _clinical("m1", "Diabetes Obes Metab", "x", ["Meta-Analysis"]),
+        _clinical("l1", "Lancet Diabetes Endocrinol", "x", ["Randomized Controlled Trial"]),
+        _clinical("l2", "Lancet", "x", ["Randomized Controlled Trial"]),
+    ]
+    res = clinical_response(_topic({s.id: "supports" for s in srcs}), srcs)
+    # Lancet family collapses to one "Lancet"; tier-A/B journal before reviews; at most 3 names.
+    assert res["text"].startswith("From Lancet, Diabetes Obes Metab and Diabetes Care sources")
+    assert res["n_studies"] == 5
+
+
+def test_public_template_exact():
+    posts = [_post("p1", "Reddit"), _post("p2", "TikTok"), _post("p3", "Instagram")]
+    res = public_response(_topic({"p1": "supports", "p2": "supports", "p3": "opposes"}), posts)
+    assert res["text"] == ("Across Reddit, TikTok and Instagram, we identified 2 posts supporting "
+                           "the conclusion that Z. 1 post disputed it.")
+    assert (res["n_support"], res["n_oppose"]) == (2, 1)
+    assert res["platforms"] == ["Reddit", "TikTok", "Instagram"]
+
+
+def test_public_no_disputed_clause_when_no_opposition():
+    posts = [_post("p1", "Reddit"), _post("p2", "Reddit")]
+    res = public_response(_topic({"p1": "supports", "p2": "supports"}), posts)
+    assert res["text"] == "Across Reddit, we identified 2 posts supporting the conclusion that Z."
+
+
+def test_public_cautions_count_as_disputed():
+    posts = [_post("p1", "Reddit"), _post("p2", "X")]
+    res = public_response(_topic({"p1": "supports", "p2": "cautions"}), posts)
+    assert res["n_oppose"] == 1
+    assert res["text"].endswith(" 1 post disputed it.")
+
+
+def test_singular_words():
+    one = _clinical("s1", "Obesity", "We enrolled 50 adults.", ["Review"])
+    res = clinical_response(_topic({"s1": "supports"}), [one])
+    assert " 1 study with " in res["text"]
+    pub = public_response(_topic({"p1": "supports"}), [_post("p1", "Reddit")])
+    assert " 1 post supporting " in pub["text"]
+
+
+def test_zero_matches_fall_back_to_plain_sentences():
+    res = clinical_response(_topic({}), [_clinical("s1", "Obesity", "x", ["Review"])])
+    assert res["n_studies"] == 0
+    assert "0 studies with study sizes" not in res["text"]
+    assert res["text"].endswith("Thus, we recommend Y.")
+    pub = public_response(_topic({}), [_post("p1", "Reddit")])
+    assert pub["n_support"] == pub["n_oppose"] == 0
+    assert "Across ," not in pub["text"]
+
+
+def test_public_counts_synthetic_posts():
+    posts = [_post("p1", "Reddit"), _post("p2", "TikTok", synthetic=False),
+             _post("p3", "X"), _post("p4", "X")]  # p4 untagged: not counted
+    res = public_response(_topic({"p1": "supports", "p2": "supports", "p3": "opposes"}), posts)
+    assert res["n_synthetic"] == 2
+    for topic in compose_all():
+        pub = topic["public"]
+        assert pub["n_synthetic"] == pub["n_support"] + pub["n_oppose"]  # fixture posts are all synthetic
+
+
+# ------------------------------------------------------------- fixture + safety
+
+def test_topics_fixture_ids_and_stance_targets():
+    topics = load_topics()
+    assert [t["id"] for t in topics] == TOPIC_IDS
+    known = {s.id for s in load_snapshot()} | {p.id for p in load_posts()}
+    for t in topics:
+        assert set(t["stances"]) <= known, f"{t['id']} tags unknown source ids"
+        assert set(t["stances"].values()) <= {"supports", "opposes", "cautions"}
+        for field in ("finding", "recommendation"):
+            assert t[field][0].islower() and not t[field].endswith("."), (t["id"], field)
+
+
+def test_recommendations_never_contain_peptide_dosing():
+    for topic in compose_all():
+        for lane in ("clinical", "public"):
+            assert not _dosing_near_peptide(topic[lane]["text"]), (topic["topic_id"], lane)
+        assert not DOSE_PATTERN.search(topic["clinical"]["recommendation"])
+
+
+def test_bpc_topic_refers_to_clinician():
+    by_id = {t["topic_id"]: t for t in compose_all()}
+    for tid in ("t-bpc-muscle", "t-bpc-safety"):
+        text = by_id[tid]["clinical"]["text"]
+        assert "clinician" in text or "prescriber" in text, tid
+        assert "not FDA-approved" in text, tid
+
+
+def test_redact_dosing():
+    out, flag = redact_dosing("Some use BPC-157 at 250 mcg daily. Lift weights.")
+    assert flag is True
+    assert "250" not in out and "BPC-157" not in out
+    assert "[removed: dosing for a non-approved peptide]" in out
+    assert out.endswith("Lift weights.")
+    assert redact_dosing("Semaglutide 2.4 mg weekly.") == ("Semaglutide 2.4 mg weekly.", False)
+
+
+def test_redact_dosing_peptide_spelling_variants():
+    out, flag = redact_dosing("BPC157 was injected at 500mcg. Rest days matter.")
+    assert flag is True and out.endswith("Rest days matter.")
+
+
+def test_composer_redacts_and_flags():
+    topic = _topic({"s1": "supports"})
+    topic["finding"] = "people take BPC-157 at 250 mcg"
+    res = clinical_response(topic, [_clinical("s1", "Obesity", "x", ["Review"])])
+    assert res["redacted"] is True
+    assert "250 mcg" not in res["text"]
+
+
+def test_compose_all_shape():
+    out = compose_all()
+    assert [t["topic_id"] for t in out] == TOPIC_IDS
+    for t in out:
+        assert t["topic"]
+        assert t["clinical"]["text"] and t["public"]["text"]
+        assert t["clinical"]["topic_id"] == t["public"]["topic_id"] == t["topic_id"]
+        assert len(t["clinical"]["study_sizes"]) == t["clinical"]["n_studies"]

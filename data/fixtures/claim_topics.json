@@ -1,0 +1,100 @@
+{
+  "_note": "Hand-tagged claim topics for the structured response composer. finding and recommendation are hand-written placeholders pending the M3 generator; replace them with generator output later. Stances were tagged by reading each source: supports = the source backs the topic claim; opposes = it contradicts the claim; cautions = it partly backs the claim or questions it with a material caveat (animal-only data, no human trials, lean mass not the same as muscle). Untagged sources do not address the claim. Public posts pub-01..pub-16 are SYNTHETIC placeholders, not real people or quotes. No dosing for non-approved peptides may appear here; for FDA-approved GLP-1s, follow the prescriber.",
+  "topics": [
+    {
+      "id": "t-resistance",
+      "topic": "Resistance training preserves muscle during GLP-1 weight loss",
+      "finding": "adding resistance training to weight loss keeps more lean mass than weight loss without it, and supervised programs can build muscle and strength",
+      "recommendation": "regular resistance training tailored to you as part of GLP-1 treatment, building up gradually and checking with your prescriber first if you have heart or joint problems",
+      "public_conclusion": "strength training helps protect muscle while on a GLP-1",
+      "stances": {
+        "pmid-38687506": "supports",
+        "pmid-39295512": "supports",
+        "pmid-41877354": "supports",
+        "pub-01": "supports",
+        "pub-02": "supports",
+        "pub-05": "supports",
+        "pub-07": "supports",
+        "pub-08": "supports",
+        "pub-16": "supports"
+      }
+    },
+    {
+      "id": "t-protein",
+      "topic": "Prioritising protein helps preserve muscle on a GLP-1",
+      "finding": "adequate high-quality protein, together with resistance training, is one of the main ways to limit muscle loss during GLP-1 weight loss",
+      "recommendation": "making enough high-quality protein a priority, using a protein shake or other oral nutrition supplement when appetite is low, and asking a dietitian or your prescriber for a target that fits you",
+      "public_conclusion": "putting protein first, including shakes when appetite is low, helps protect muscle on a GLP-1",
+      "stances": {
+        "pmid-39295512": "supports",
+        "pmid-41877354": "supports",
+        "pub-01": "supports",
+        "pub-03": "supports",
+        "pub-07": "supports",
+        "pub-10": "supports"
+      }
+    },
+    {
+      "id": "t-leanmass",
+      "topic": "Lean-mass loss on a GLP-1 is meaningful",
+      "finding": "roughly a quarter to over a third of the weight lost on semaglutide or tirzepatide is lean mass, a share similar to diet-driven weight loss, although some studies find muscle function holds up or improves",
+      "recommendation": "treating muscle protection as part of GLP-1 treatment from the start, with resistance training and enough protein, and asking your prescriber about checking body composition or strength if you are older or already have low muscle mass",
+      "public_conclusion": "a real share of the weight lost on a GLP-1 is muscle, not just fat",
+      "stances": {
+        "pmid-39996356": "supports",
+        "pmid-41877354": "supports",
+        "pmid-38687506": "supports",
+        "pmid-39295512": "supports",
+        "pmid-38937282": "cautions",
+        "pmid-41068996": "cautions",
+        "pub-01": "supports",
+        "pub-05": "supports",
+        "pub-07": "supports",
+        "pub-08": "cautions"
+      }
+    },
+    {
+      "id": "t-bpc-muscle",
+      "topic": "BPC-157 helps preserve muscle on a GLP-1",
+      "finding": "the muscle and tendon healing reported for BPC-157 comes almost entirely from rodent studies, and no human trial has tested it for muscle loss on a GLP-1",
+      "recommendation": "not starting BPC-157 without first talking to your prescriber or pharmacist, because it is not FDA-approved and no human trials support it for preserving muscle on a GLP-1",
+      "public_conclusion": "BPC-157 helps protect muscle while on a GLP-1",
+      "stances": {
+        "pmid-40756949": "cautions",
+        "pmid-30915550": "cautions",
+        "pmid-40005999": "cautions",
+        "pub-04": "supports",
+        "pub-06": "supports",
+        "pub-09": "opposes",
+        "pub-11": "cautions",
+        "pub-12": "opposes"
+      }
+    },
+    {
+      "id": "t-bpc-safety",
+      "topic": "BPC-157 is not FDA-approved and its safety in people is unproven",
+      "finding": "the FDA has not approved BPC-157 because human clinical studies are lacking, no clinical safety data were found, and unregulated products may be contaminated",
+      "recommendation": "not starting BPC-157 without first talking to your prescriber or pharmacist, because it is not FDA-approved, its safety in people is unknown, and no human trials support it for preserving muscle on a GLP-1; if you already use it, tell them so they can check for interactions",
+      "public_conclusion": "BPC-157 is not FDA-approved and products sold online carry real safety risks",
+      "stances": {
+        "pmid-40756949": "supports",
+        "pmid-40005999": "supports",
+        "pmid-30915550": "cautions",
+        "pub-09": "supports",
+        "pub-11": "supports",
+        "pub-12": "supports"
+      }
+    },
+    {
+      "id": "t-collagen",
+      "topic": "Collagen peptides prevent muscle loss on a GLP-1",
+      "finding": "muscle protection during GLP-1 weight loss rests on adequate high-quality protein and resistance training, and none of our clinical sources tests collagen itself",
+      "recommendation": "relying on adequate high-quality protein and resistance training to protect muscle rather than on collagen peptides, and asking a dietitian if you are unsure which protein sources count",
+      "public_conclusion": "collagen peptides prevent muscle loss on a GLP-1",
+      "stances": {
+        "pmid-39295512": "cautions",
+        "pub-13": "supports"
+      }
+    }
+  ]
+}

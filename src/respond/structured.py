@@ -231,10 +231,12 @@ def public_response(topic: dict, posts: list[Source]) -> dict:
 EXCLUDE_T2D_REASON = "type 2 diabetes population; persona has no diabetes"
 # "diabetes" but not "prediabetes" / "pre-diabetes": prediabetes does not count as diabetes.
 _HAS_DIABETES = re.compile(r"(?<!pre)(?<!pre-)\bdiabetes\b", re.IGNORECASE)
+# A negated condition ("no diabetes", "without diabetes", "not diabetic") is not diabetes.
+_NEGATED = re.compile(r"\b(?:no|not|without)\s", re.IGNORECASE)
 
 
 def _has_diabetes(persona: Persona) -> bool:
-    return any(_HAS_DIABETES.search(c) for c in persona.conditions)
+    return any(_HAS_DIABETES.search(c) and not _NEGATED.search(c) for c in persona.conditions)
 
 
 def _t2d_population_title(title: str) -> bool:

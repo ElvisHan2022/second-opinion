@@ -46,6 +46,19 @@ def test_persona_with_type2_diabetes_excludes_nothing():
     assert excluded == [] and _ids(kept) == _ids(sources)
 
 
+def test_negated_diabetes_does_not_count_as_diabetes():
+    for conditions in (["no diabetes"], ["obesity", "Without diabetes"], ["not diabetes"]):
+        p = dataclasses.replace(load_persona("p-002"), conditions=conditions)
+        _, excluded = persona_filter(load_snapshot(), p)
+        assert {STEP_2, SURMOUNT_2} <= {e["id"] for e in excluded}, conditions
+
+
+def test_weightloss_finding_is_persona_neutral():
+    wl = {t["topic_id"]: t for t in compose_all()}["t-glp1-weightloss"]
+    assert "diabetes" not in wl["clinical"]["finding"].lower()
+    assert "in adults with obesity" in wl["clinical"]["text"]
+
+
 def test_prediabetes_does_not_count_as_diabetes():
     p = load_persona("p-001")  # prediabetes only
     _, excluded = persona_filter(load_snapshot(), p)
